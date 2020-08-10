@@ -40,7 +40,7 @@ function Index() {
           <Image className="user-img" src={manHeadPortrait}></Image>
           <View className="user-name">嗨，{userName}</View>
         </View>
-        <Button className="appointment-button">预约会议</Button>
+        <View className="appointment-button">预约会议</View>
       </View>
       {/* end of 用户 */}
       {/* 最近会议 */}
