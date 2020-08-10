@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "vs-luck",
 	"description": "luck",
-	"appid": "touristappid",
+	"appid": "wx26ca4683a81cb386",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
@@ -27,11 +27,42 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"condition": {}
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "会议记录",
+					"pathName": "pages/meetingReserve/index",
+					"scene": null
+				}
+			]
+		}
+	}
 }

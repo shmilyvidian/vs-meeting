@@ -1,50 +1,47 @@
-import React, { Component } from 'react'
-import { View, Text } from '@tarojs/components'
-import { observer, inject } from 'mobx-react'
-import { HomeStore } from '@/store/homeStore'
-import './index.scss'
-
+import React, { Component } from "react";
+import { View, Text } from "@tarojs/components";
+// import { observer, inject } from "mobx-react";
+// import { HomeStore } from "@/store/homeStore";
+import { AtButton } from "taro-ui";
+console.log(AtButton);
 type propsType = {
   store: {
-    homeStore,
-  }
-}
+    // homeStore;
+  };
+};
 
-type stateType = {
-
-}
+type stateType = {};
 
 interface Index {
-  props: propsType
-  state: stateType
+  props: propsType;
+  state: stateType;
 }
 
-@inject('store')
-@observer
+// @inject('store')
+// @observer
 class Index extends Component {
-  private homeStore: HomeStore
-  constructor(props){
-    super(props)
-    this.homeStore = props.store.homeStore
+  // private homeStore: HomeStore;
+  constructor(props) {
+    super(props);
+    // this.homeStore = props.store.homeStore;
   }
-  componentWillMount () { }
+  componentWillMount() {}
 
-  componentDidMount () { }
+  componentDidMount() {}
 
-  componentWillUnmount () { }
+  componentWillUnmount() {}
 
-  componentDidShow () { }
+  componentDidShow() {}
 
-  componentDidHide () { }
+  componentDidHide() {}
 
-  render () {
-    const { name } = this.homeStore
+  render() {
     return (
-      <View className='index'>
-        <Text>{name}</Text>
+      <View className="index">
+        <AtButton>按钮</AtButton>
       </View>
-    )
+    );
   }
 }
 
-export default Index
+export default Index;
