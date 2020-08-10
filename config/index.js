@@ -8,27 +8,25 @@ const config = {
     // 640: 2.34 / 2,
     // 750: 1,
     // 828: 1.81 / 2
-    '750': 1/2,
+    '750': 1 / 2,
     '375': 1, // 这里我使用375作为100% 有需要自行更改
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
   plugins: [],
-  defineConstants: {
-  },
+  defineConstants: {},
   copy: {
-    patterns: [
-    ],
-    options: {
-    }
+    patterns: [],
+    options: {}
   },
   framework: 'react',
   alias: {
+    '@': path.resolve(__dirname, '..', 'src'),
     '@/components': path.resolve(__dirname, '..', 'src/components'),
     '@/utils': path.resolve(__dirname, '..', 'src/utils'),
     '@/styles': path.resolve(__dirname, '..', 'src/styles'),
     '@/store': path.resolve(__dirname, '..', 'src/store'),
-    "@/assets":path.resolve(__dirname, '..', 'src/assets'),
+    "@/assets": path.resolve(__dirname, '..', 'src/assets'),
   },
   mini: {
     postcss: {
@@ -69,8 +67,7 @@ const config = {
     postcss: {
       autoprefixer: {
         enable: true,
-        config: {
-        }
+        config: {}
       },
       cssModules: {
         enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
