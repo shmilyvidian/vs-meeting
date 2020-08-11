@@ -1,0 +1,176 @@
+$fontColor: #303133;
+
+.center {
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
+  flex-direction: 'column';
+}
+
+.index-main {
+  @extend .center;
+  width: 750px;
+  height: 100%;
+  background: #E9E9E9;
+  overflow: hidden;
+}
+
+.bg-fff {
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.room {
+  &-wrapper {
+    display: flex;
+    padding: 40px 34px;
+  }
+
+  &-img {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #CBDCFF;
+    border-radius: 1px;
+    margin-right: 18px;
+  }
+
+  &-info {
+    width: 100%;
+  }
+
+  &-other {
+    font-size: 24px;
+    color: #909399;
+    display: flex;
+  }
+
+  &-feature {
+    margin-right: 24px;
+  }
+
+  &-info-top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &-number {
+    font-size: 36px;
+    font-weight: bold;
+    color: $fontColor;
+  }
+
+  &-length {
+    font-size: 24px;
+    color: #909399;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.conference-room {
+  margin-top: 16px;
+  box-sizing: border-box;
+  padding: 0 32px;
+
+  &-title {
+    color: $fontColor;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    margin-bottom: 36px;
+  }
+
+  &-second {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28px;
+    color: $fontColor;
+  }
+
+  &-second-vr{
+    font-size: 28px;
+    color: $fontColor;
+    display: flex;
+  }
+
+  &-date {
+    color: #606266;
+  }
+
+  &-vr {
+    height: 400px;
+    width: 686px;
+    border-radius: 2px;
+    background: #D8D8D8;
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $fontColor;
+    font-size: 32px;
+  }
+
+  &-draw {
+    display: flex;
+    margin-top: 48px;
+  }
+
+  &-plan {
+    height: 252px;
+    width: 522px;
+    border-radius: 2px;
+    background: #D8D8D8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $fontColor;
+    font-size: 32px;
+
+
+  }
+
+  &-legend {
+    margin-top: 20px;
+  }
+
+  &-legend-item {
+    font-size: 24px;
+    color: $fontColor;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  &-legend-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 16px;
+  }
+
+  .icon-blue {
+    background: #32ADFF;
+  }
+  .icon-green {
+    background: #0DCD87;
+  }
+
+  .icon-sky{
+    background: #4F85F6;
+  }
+
+  &-legend {
+    margin-left: 28px;
+  }
+}
+
+.people-icon{
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  margin-top: 2px;
+}

@@ -1,5 +1,9 @@
 export default {
-  pages: ["pages/index/index", "pages/meetingReserve/index"],
+  pages: [
+    "pages/viewConferenceRoom/index",
+    "pages/index/index",
+    "pages/meetingReserve/index",
+  ],
   // 分包
   subPackages: [],
   window: {

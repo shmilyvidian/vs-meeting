@@ -1,6 +1,6 @@
 .metting-list {
   &-item {
-    margin-bottom: 44px;
+    height: 66px;
   }
 }
 
@@ -8,6 +8,7 @@
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+  padding-top: 10px;
 
   &-title {
     color: #303133;
@@ -16,26 +17,26 @@
   }
 
   &-date {
-    font-size: 28px;
+    font-size: 14px;
     color: #909399;
   }
 }
 
 .metting-item-bottom {
-  margin-top: 4px;
-  font-size: 28px;
+  margin-top: 2px;
+  font-size: 14px;
   color: #909399;
 }
 
 .status-wrapper{
-  font-size: 16px;
+  font-size: 8px;
   display: flex;
   align-items: center;
-  padding: 6px;
-  width: 60px;
-  height: 28px;
+  padding: 3px;
+  width: 30px;
+  height: 14px;
   box-sizing: border-box;
-  margin-left: 8px;
+  margin-left: 4px;
 }
 
 .wait {

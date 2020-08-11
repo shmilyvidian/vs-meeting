@@ -7,7 +7,7 @@
 
 .index-main {
   @extend .center;
-  width: 375px;
+  width: 750px;
   height: 100%;
   background: #E9E9E9;
   overflow: hidden;
@@ -16,13 +16,13 @@
 .appointment-button {
   @extend .center;
   background-image: linear-gradient(270deg, #3270FE 0%, #4097FF 100%);
-  border-radius: 4px;
+  border-radius: 8px;
   color: #fff;
-  width: 325px;
-  height: 42px;
-  margin: 61px auto 42px;
+  width: 650px;
+  height: 84px;
+  margin: 100px auto 48px;
   text-align: center;
-  line-height: 42px;
+  line-height: 84px;
 }
 
 .bg-fff {
@@ -33,39 +33,35 @@
 .user-wrapper {
   display: flex;
   align-items: center;
-  padding-top: 40px;
-  padding-left: 16px;
+  padding-top: 80px;
+  padding-left: 32px;
 }
 
 .user-img {
-  width: 44px;
-  height: 44px;
-  margin-right: 11px;
+  width: 88px;
+  height: 88px;
+  margin-right: 22px;
 }
 
 .lastest-meeting {
-  margin-top: 8px;
-
+  margin-top: 16px;
   box-sizing: border-box;
-  padding: 16px;
-
-  &-list {
-    margin-top: 8px;
-  }
+  padding: 32px;
 
   &-flex {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 36px;
   }
 
   &-title {
-    font-size: 16px;
+    font-size: 32px;
     color: #303133;
     font-weight: bold;
   }
 
   &-more {
-    font-size: 12px;
+    font-size: 24px;
     color: #303133;
     display: flex;
     align-items: center;
@@ -73,8 +69,8 @@
 
   &-more-icon {
     color: #303133;
-    width: 8px;
-    height: 10px;
-    margin-left: 4px;
+    width: 16px;
+    height: 20px;
+    margin-left: 8px;
   }
 }
