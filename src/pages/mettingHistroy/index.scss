@@ -1,0 +1,107 @@
+$fontColor: #303133;
+
+@import "~taro-ui/dist/style/components/icon.scss";
+
+.center {
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
+  flex-direction: 'column';
+}
+
+.index-main {
+  @extend .center;
+  width: 750px;
+  height: 100%;
+  background: #E9E9E9;
+  overflow: hidden;
+}
+
+.appointment-button {
+  @extend .center;
+  background-image: linear-gradient(270deg, #3270FE 0%, #4097FF 100%);
+  border-radius: 8px;
+  color: #fff;
+  width: 650px;
+  height: 84px;
+  margin: 100px auto 48px;
+  text-align: center;
+  line-height: 84px;
+}
+
+.bg-fff {
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.user-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 52px;
+  padding-left: 38px;
+  &-left{
+    display: flex;
+    align-items: center;
+  }
+
+  &-right{
+    display: flex;
+    margin-right: 37px;
+    align-items: center;
+  }
+
+  &-date{
+    font-size: 32px;
+    color: $fontColor;
+    margin-right: 20px;
+  }
+}
+
+.user-img {
+  width: 88px;
+  height: 88px;
+  margin-right: 22px;
+}
+
+.tabs{
+  margin-top: 52px;
+  margin-left: 32px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  &-item{
+    font-size: 32px;
+    color: #909399;
+    margin-right: 44px;
+  }
+  &-active{
+    font-size: 36px;
+    color: #3476FE;
+    font-weight: bold;
+  }
+}
+
+.lastest-meeting {
+  margin-top: 16px;
+  box-sizing: border-box;
+  padding: 0 32px ;
+
+  &-flex {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 38px;
+  }
+
+  &-list{
+    padding: 0 32px;
+  }
+
+  &-title {
+    font-size: 36px;
+    margin-top: 12px;
+    color: #303133;
+    font-weight: bold;
+  }
+
+}
