@@ -55,8 +55,8 @@ const Index = () => {
   const [searchList, setSearchList] = useState(list)
   let allSelectListValue = []
   list.map((allItem, allIndex) => {
-    if(allItem.items.length) {
-      allItem.items.map((v, i) =>{
+    if (allItem.items.length) {
+      allItem.items.map((v, i) => {
         allSelectListValue.push(v.value)
       })
     }
@@ -74,20 +74,20 @@ const Index = () => {
         }]
     }
   ]
-  const listContact = searchList.map((_item, i) => { 
-    return(
+  const listContact = searchList.map((_item, i) => {
+    return (
       <View className='contact-item-name' key={i}>
-        <View key={i+'title'} className='contact-item-title'>{_item.key}</View>
+        <View key={i + 'title'} className='contact-item-title'>{_item.key}</View>
         <AtCheckbox
           options={_item.items}
-          key={i+'name'}
+          key={i + 'name'}
           selectedList={checkedList}
-          onChange={(val)=>setCheckedList(val)}
+          onChange={(val) => setCheckedList(val)}
         />
       </View>
     )
   })
-  
+
   function setCheckedAllList(val) {
     setCheckedList(val.length ? allSelectListValue : [])
     setCheckedAllListx(val)
@@ -97,14 +97,14 @@ const Index = () => {
     setName(val)
     const filItemList = list.map((filItem, filIndex) => {
       const arr = filItem.items.filter((secItem, secIndex) => {
-        if(secItem.label.search(val) === -1) {
+        if (secItem.label.search(val) === -1) {
           return false
         }
         return true
       })
       filItem.items = arr
       return filItem
-    }).filter((v,i) => {
+    }).filter((v, i) => {
       return !!v.items.length
     })
     setSearchList(filItemList)
@@ -116,38 +116,38 @@ const Index = () => {
         list={list}
         onClick={onClick}
       > */}
-        <View className='contact-input-name'>
-          <AtInput
-            name='value'
-            type='text'
-            placeholder='搜索联系人'
-            placeholderClass="placeholder-class"
-            // placeholderStyle="color: red;font-size:12px;"
-            value={name}
-            onChange={(val)=>searchName(val)}
-          />
-        </View>
-        <View className='contact-all-name'>
-          {
-            allSelectList.map((_item, i) => {
-              return (<AtCheckbox
-                options={_item.items}
-                key={i+'all'}
-                selectedList={checkedAllList}
-                onChange={(val)=>setCheckedAllList(val)}
-              />)
-            })
-          }
-          <View className='contact-all-name-title'>已选（{checkedList.length}）</View>
-        </View>
-        <View className='contact-list-name'>
-          {
-            listContact
-          }
-        </View>
-        <View className='contact-leter-name'>
-          <LetterList />
-        </View>
+      <View className='contact-input-name'>
+        <AtInput
+          name='value'
+          type='text'
+          placeholder='搜索联系人'
+          placeholderClass="placeholder-class"
+          // placeholderStyle="color: red;font-size:12px;"
+          value={name}
+          onChange={(val) => searchName(val)}
+        />
+      </View>
+      <View className='contact-all-name'>
+        {
+          allSelectList.map((_item, i) => {
+            return (<AtCheckbox
+              options={_item.items}
+              key={i + 'all'}
+              selectedList={checkedAllList}
+              onChange={(val) => setCheckedAllList(val)}
+            />)
+          })
+        }
+        <View className='contact-all-name-title'>已选（{checkedList.length}）</View>
+      </View>
+      <View className='contact-list-name'>
+        {
+          listContact
+        }
+      </View>
+      <View className='contact-leter-name'>
+        <LetterList />
+      </View>
       {/* </AtIndexes> */}
     </View>
   )

@@ -1,0 +1,58 @@
+@import "~taro-ui/dist/style/components/flex.scss";
+
+@import "~taro-ui/dist/style/components/icon.scss";
+
+.meeting-room-page {
+  .meeting-room-date {
+    display: flex;
+    align-items: center;
+    height: 222px;
+    background: #fff;
+    font-size: 24px;
+
+    .meeting-room-years {
+      flex: none;
+      width: 21.9%;
+      white-space: nowrap;
+      text-align: center;
+
+      .meeting-room-year {
+        font-size: 36px;
+        color: #303133;
+      }
+
+      .meeting-room-mouth {
+        color: #909399;
+      }
+    }
+
+    .meeting-room-week {
+      text-align: center;
+      color: #303133;
+
+      .meeting-room-label {
+        height: 80px;
+        line-height: 80px;
+      }
+    }
+  }
+
+  .meeting-room-select-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88px;
+    padding: 0 32px;
+    margin-top: 16px;
+    font-size: 32px;
+    background: #fff;
+    
+    .meeting-room-select-title-l {
+      color: #303133;
+    }
+
+    .meeting-room-select-title-r {
+      color: #606266;
+    }
+  }
+}

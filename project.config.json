@@ -78,9 +78,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "联系人",
-					"pathName": "pages/contactPerson/index",
+					"id": 3,
+					"name": "选择会议室",
+					"pathName": "pages/meetingRoomSelect/index",
 					"query": "",
 					"scene": null
 				}

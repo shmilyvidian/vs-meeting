@@ -27,6 +27,11 @@ export default {
       root: "pages/contactPerson",
       pages: ["index"],
     },
+    {
+      // 选择会议室
+      root: "pages/meetingRoomSelect",
+      pages: ["index"],
+    },
   ],
   window: {
     backgroundTextStyle: "light",

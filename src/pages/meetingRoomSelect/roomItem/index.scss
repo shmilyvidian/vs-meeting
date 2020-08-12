@@ -1,0 +1,73 @@
+@import "~taro-ui/dist/style/components/flex.scss";
+
+.room-item-box {
+  padding: 28px 32px;
+  margin-top: 16px;
+  background: #fff;
+
+  .room-item-title {
+    display: flex;
+    margin-bottom: 60px;
+    font-size: 24px;
+    color: #909399;
+
+    .room-item-title-img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .room-item-title-text {
+      flex: auto;
+      display: flex;
+      flex-direction: column;
+      padding-left: 18px;
+
+      .room-item-title-numb {
+        font-size: 32px;
+        color: #303133;
+      }
+      
+      .room-item-title-f {
+        display: flex;
+
+        .room-item-title-f-l {
+          padding-right: 28px;
+        }
+      }
+    }
+
+    .room-item-title-sum {
+      display: flex;
+
+      .room-item-title-icon {
+        margin-right: 12px;
+        font-size: 32px;
+      }
+    }
+  }
+
+  .room-item-time-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    // width: calc(100%);
+    padding-left: 16px;
+    margin-left: -8px;
+    
+    .room-time-line-numb {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      font-size: 22px;
+      transform: translateX(-50%);
+    }
+  }
+
+  .room-item-time-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 10px;
+  }
+}
