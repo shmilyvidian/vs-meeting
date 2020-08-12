@@ -1,7 +1,9 @@
 import { View } from '@tarojs/components'
 // import { AtIndexes } from 'taro-ui'
 import React, { useState } from 'react'
-import { AtInput, AtCheckbox } from 'taro-ui'
+import Taro from "@tarojs/taro";
+import { AtInput, AtCheckbox, AtButton } from 'taro-ui'
+import { gennerateTaroNavigateParams } from "@/utils/urlParam";
 
 import LetterList from './letterList/index'
 import './index.scss'
@@ -47,6 +49,60 @@ const Index = () => {
           'name': '保定',
           'value': 'blist2',
           'label': 'b阿坝2',
+          'key': 'bkey2',
+        }
+      ]
+    },
+    {
+      title: 'C',
+      key: 'C',
+      items: [
+        {
+          'name': '北京',
+          'value': 'clist1',
+          'label': 'c阿坝1',
+          'key': 'bkey1',
+        },
+        {
+          'name': '保定',
+          'value': 'clist2',
+          'label': 'c阿坝2',
+          'key': 'bkey2',
+        }
+      ]
+    },
+    {
+      title: 'D',
+      key: 'D',
+      items: [
+        {
+          'name': '北京',
+          'value': 'dlist1',
+          'label': 'd阿坝1',
+          'key': 'bkey1',
+        },
+        {
+          'name': '保定',
+          'value': 'dlist2',
+          'label': 'd阿坝2',
+          'key': 'bkey2',
+        }
+      ]
+    },
+    {
+      title: 'E',
+      key: 'E',
+      items: [
+        {
+          'name': '北京',
+          'value': 'elist1',
+          'label': 'e阿坝1',
+          'key': 'bkey1',
+        },
+        {
+          'name': '保定',
+          'value': 'elist2',
+          'label': 'e阿坝2',
           'key': 'bkey2',
         }
       ]
@@ -110,12 +166,13 @@ const Index = () => {
     setSearchList(filItemList)
   }
 
+  // 点击完成返回预约会议
+  function goMeetingReserve() {
+    Taro.navigateTo(gennerateTaroNavigateParams("meetingReserve", {}));
+  }
+
   return (
     <View className="contact-page">
-      {/* <AtIndexes
-        list={list}
-        onClick={onClick}
-      > */}
       <View className='contact-input-name'>
         <AtInput
           name='value'
@@ -148,7 +205,11 @@ const Index = () => {
       <View className='contact-leter-name'>
         <LetterList />
       </View>
-      {/* </AtIndexes> */}
+      {/* 选择联系人完成按钮 */}
+      <View className='contact-leter-btn'>
+        <AtButton type='primary' disabled={!checkedList.length} onClick={goMeetingReserve}>完成</AtButton>
+      </View>
+      {/* end 选择联系人完成按钮 */}
     </View>
   )
 }

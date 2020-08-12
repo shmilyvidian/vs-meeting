@@ -202,21 +202,21 @@ const Index = () => {
           range={meetingRoomRange}
           onChange={roomSelect.bind(this)}
         >
-          <view className="meeting-room-select-title">
-            <view className="meeting-room-select-title-l">会议室</view>
-            <view className="meeting-room-select-title-r"
+          <View className="meeting-room-select-title">  
+            <View className="meeting-room-select-title-l">会议室</View>
+            <View className="meeting-room-select-title-r"
             >  
               {roomSelectArrValue}
               <View className='at-icon at-icon-chevron-right'></View>
-            </view>
-          </view>
+            </View>
+          </View>
         </Picker>
       </View>
       {/* end 会议室选择 */}
       {/* 会议室详情 */}
-        <view className="meeting-room-detail">
+        <View className="meeting-room-detail">
           {roomItemList}
-        </view>
+        </View>
       {/* end 会议室详情 */}
     </View>
   )
