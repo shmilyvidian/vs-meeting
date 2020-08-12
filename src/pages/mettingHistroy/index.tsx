@@ -11,6 +11,22 @@ import manHeadPortrait from "@/asstes/images/headPortrait/man.svg";
 
 function Index() {
   const [userName] = useState("张宏兵");
+  let [tabsType,setTabsType] = useState('1')
+
+  const [tabsMap] = useState([
+    {
+      label: '全部',
+      index: '1'
+    },
+    {
+     label: '我的预约',
+     index: '2'
+    },
+    {
+      label: '我参与的',
+      index: '3'
+    }
+  ])
 
   const [meetingList] = useState([
     {
@@ -39,11 +55,17 @@ function Index() {
     },
   ]);
 
+  // 1.我预约的会议 2.参与会议 3.查看过去的会议
   function goMeetingReserve() {
-    // 1.我预约的会议 2.参与会议 3.查看过去的会议
     Taro.navigateTo(
-      gennerateTaroNavigateParams("meetingReserve", { fromStatus: "1" })
+      gennerateTaroNavigateParams("meetingReserve", { fromStatus: tabsType })
     );
+  }
+
+  // 切换预约列表
+  function onChangeTabs(status){
+    setTabsType(tabsType = status)
+    console.log(tabsType)
   }
 
   // 渲染最近会议列表
@@ -71,11 +93,15 @@ function Index() {
             <View className="at-icon at-icon-calendar"></View>
           </View>
         </View>
+        {/* tabs切换 */}
         <View className="tabs">
-          <View className="tabs-item tabs-active">全部</View>
-          <View className="tabs-item">我预约的</View>
-          <View className="tabs-item">我参加的</View>
+          {
+            tabsMap.map((item,index) =>{
+            return <View key={index} className={`tabs-item + ${tabsType === item.index ? 'tabs-active' : ''} `} onClick={() => onChangeTabs(item.index)}>{item.label}</View>
+            })
+          }
         </View>
+        {/* end of tabs切换 */}
       </View>
       {/* end of 用户 */}
       {/* 会议记录 */}
