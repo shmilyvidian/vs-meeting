@@ -13,6 +13,21 @@ function Index() {
   const [userName] = useState("张宏兵");
   let [tabsType,setTabsType] = useState('1')
 
+  const [tabsMap] = useState([
+    {
+      label: '全部',
+      index: '1'
+    },
+    {
+     label: '我的预约',
+     index: '2'
+    },
+    {
+      label: '我参与的',
+      index: '3'
+    }
+  ])
+
   const [meetingList] = useState([
     {
       date: "8月9号",
@@ -78,11 +93,15 @@ function Index() {
             <View className="at-icon at-icon-calendar"></View>
           </View>
         </View>
+        {/* tabs切换 */}
         <View className="tabs">
-          <View className={`tabs-item + ${tabsType === '1' ? 'tabs-active' : ''} `} onClick={() => onChangeTabs('1')}>全部</View>
-          <View className={`tabs-item + ${tabsType === '2' ? 'tabs-active' : ''} `} onClick={() => onChangeTabs('2')}>我预约的</View>
-          <View className={`tabs-item + ${tabsType === '3' ? 'tabs-active' : ''} `} onClick={() => onChangeTabs('3')}>我参加的</View>
+          {
+            tabsMap.map((item,index) =>{
+            return <View key={index} className={`tabs-item + ${tabsType === item.index ? 'tabs-active' : ''} `} onClick={() => onChangeTabs(item.index)}>{item.label}</View>
+            })
+          }
         </View>
+        {/* end of tabs切换 */}
       </View>
       {/* end of 用户 */}
       {/* 会议记录 */}
