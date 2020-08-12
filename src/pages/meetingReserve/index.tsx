@@ -4,65 +4,87 @@ import Taro, { useDidShow } from "@tarojs/taro";
 import { gennerateTaroNavigateParams } from "@/utils/urlParam";
 import { AtInput, AtList, AtListItem } from "taro-ui";
 import { formFields, fillFormFields } from "./formFields";
+import { BtnViews } from "@/components/BtnViews/index";
 import "./index.scss";
 
 const remindRanges = ["提前30分钟", "提前10分钟", "提前5分钟"];
+
 function index() {
   let meetingMessageObjkeys = Object.keys(formFields);
+  //按钮状态,0预约会议，1我预约的会议，2参与会议，3查看过去的会议
+  const btnList = {
+    0: [
+      {
+        value: "完成",
+        disabled: true,
+        hidden: false,
+        class: "",
+        click: onDefaultClick,
+      },
+    ],
+    1: [
+      {
+        value: "分享会议",
+        disabled: false,
+        hidden: false,
+        class: "",
+        click: onShareMeeting,
+      },
+      {
+        value: "取消会议",
+        disabled: false,
+        hidden: false,
+        class: "default-btn",
+        click: onDefaultClick,
+      },
+    ],
+    2: [
+      {
+        value: "分享会议",
+        disabled: false,
+        hidden: false,
+        class: "",
+        click: onShareMeeting,
+      },
+      {
+        value: "退出会议",
+        disabled: false,
+        hidden: false,
+        class: "default-btn",
+        click: onDefaultClick,
+      },
+    ],
+    3: [
+      {
+        value: "再次预约",
+        disabled: false,
+        hidden: false,
+        class: "",
+        click: onAgainReserve,
+      },
+    ],
+  };
 
-  // 设置meetingMessage
-  const [meetingMessageObj, setMeetingMessageObj] = useState(formFields);
+  // 完成点击
+  function onDefaultClick() {
+    Taro.reLaunch({
+      url: "/pages/index/index",
+    });
+  }
+  // 分享会议
+  function onShareMeeting() {
+    console.log("分享会议......");
+  }
 
-  // 初始化路由参数
-  const [param, setParam] = useState({});
+  // 再次预约
+  function onAgainReserve() {
+    setFromStatus("0");
+  }
 
-  // 设置picker默认选中
-  const [remindRangeed, setremindRangeed] = useState(0);
-
-  // 设置初始状态
-  const [fromStatus, setFromStatus] = useState("0");
-  console.log(222);
-  // 从其他页面跳回来带参数的话，得渲染
-  useDidShow(() => {
-    const currentPagesData =
-      Taro.getCurrentPages().slice(-1)[0].data.query || {};
-    const queryFromStatus =
-      Taro.getCurrentPages().slice(-1)[0].options.fromStatus || "0";
-    setParam(currentPagesData);
-    console.log(111);
-    setFromStatus(queryFromStatus);
-  });
-
-  useEffect(() => {
-    const paramKeys = Object.keys(param);
-    if (paramKeys.length) {
-      paramKeys.forEach((_) => {
-        if (meetingMessageObjkeys.includes(_)) {
-          console.log(meetingMessageObj, _);
-          meetingMessageObj[_].value = param[_];
-        }
-      });
-      setMeetingMessageObj(JSON.parse(JSON.stringify(meetingMessageObj)));
-    }
-  }, [param]);
-
-  useEffect(() => {
-    const flat = meetingMessageObjkeys.every((_) => meetingMessageObj[_].value);
-    console.log("是否全部选择或输入", flat);
-  }, [meetingMessageObj]);
-
-  useEffect(() => {
-    console.log(111111111);
-    meetingMessageObj.remind.value = remindRangeed;
-    setMeetingMessageObj(JSON.parse(JSON.stringify(meetingMessageObj)));
-  }, [remindRangeed]);
-
-  function initMeetingMessageObj(queryFromStatus?: any) {
-    // const status = decodeURIComponent(queryFromStatus);
-    console.log(fromStatus);
+  // 初始化meetingMessageObj 表单状态,0预约会议，1我预约的会议，2参与会议，3查看过去的会议
+  function initMeetingMessageObj() {
     switch (fromStatus) {
       case "0":
-        console.log(formFields);
         setMeetingMessageObj(JSON.parse(JSON.stringify(formFields)));
         Taro.setNavigationBarTitle({
           title: "预约会议",
@@ -90,22 +112,75 @@ function index() {
         setMeetingMessageObj(JSON.parse(JSON.stringify(formFields)));
     }
   }
+  const [btns, setBtn] = useState(btnList["0"]);
+
+  // 设置meetingMessage
+  const [meetingMessageObj, setMeetingMessageObj] = useState(formFields);
+
+  // 初始化路由参数
+  const [param, setParam] = useState({});
+
+  // 设置picker默认选中
+  const [remindRangeed, setremindRangeed] = useState(remindRanges[0]);
+
+  // 设置初始状态
+  const [fromStatus, setFromStatus] = useState("");
+  // 从其他页面跳回来带参数的话，得渲染
+  useDidShow(() => {
+    const currentPagesData =
+      Taro.getCurrentPages().slice(-1)[0].data.query || {};
+    const queryFromStatus =
+      Taro.getCurrentPages().slice(-1)[0].options.fromStatus || "0";
+    setParam(currentPagesData);
+    setFromStatus(queryFromStatus);
+  });
+
+  useEffect(() => {
+    const paramKeys = Object.keys(param);
+    if (paramKeys.length) {
+      paramKeys.forEach((_) => {
+        if (meetingMessageObjkeys.includes(_)) {
+          meetingMessageObj[_].value = param[_];
+        }
+      });
+      setMeetingMessageObj(JSON.parse(JSON.stringify(meetingMessageObj)));
+    }
+  }, [param]);
+
+  useEffect(() => {
+    //表单状态,0预约会议，1我预约的会议，2参与会议，3查看过去的会议
+    if (fromStatus === "0") {
+      const flat = meetingMessageObjkeys.every(
+        (key) => meetingMessageObj[key].value
+      );
+      console.log(flat);
+      btnList["0"][0].disabled = !flat;
+      setBtn(btnList["0"]);
+    }
+  }, [meetingMessageObj]);
+
+  useEffect(() => {
+    if (!remindRangeed) return;
+    meetingMessageObj.remind.value = remindRangeed;
+    setMeetingMessageObj(JSON.parse(JSON.stringify(meetingMessageObj)));
+  }, [remindRangeed]);
 
   // fromStatus: number; //表单状态,0预约会议，1我预约的会议，2参与会议，3查看过去的会议
   useEffect(() => {
-    initMeetingMessageObj(fromStatus);
+    if (fromStatus === "") return;
+    initMeetingMessageObj();
+    setBtn(btnList[fromStatus]);
   }, [fromStatus]);
 
   // 输入框变化
   function iptChange(key, val) {
     meetingMessageObj[key].value = val;
     setMeetingMessageObj(JSON.parse(JSON.stringify(meetingMessageObj)));
-    console.log(meetingMessageObj);
   }
   // piaker选择change
   function remindChange(e) {
     const selectedRemind = remindRanges[Number(e.detail.value)];
-    // setremindRangeed(selectedRemind);
+    setremindRangeed(selectedRemind);
   }
 
   // 页面跳转
@@ -115,7 +190,7 @@ function index() {
 
   return (
     <View>
-      {Object.keys(formFields).map((key, i) => {
+      {Object.keys(formFields).map((key) => {
         const item = meetingMessageObj[key];
         switch (item.showType) {
           case "input":
@@ -180,6 +255,7 @@ function index() {
             return null;
         }
       })}
+      <BtnViews btnList={btns}></BtnViews>
     </View>
   );
 }
