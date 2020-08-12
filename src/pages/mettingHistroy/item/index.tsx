@@ -23,16 +23,15 @@ interface propsType {
 function LastestMeetingListItem(props: propsType) {
   const { item } = props
 
+  const statusMap = {
+    'wait':'未开始',
+    'meeting':'进行中',
+    'end':'已结束'
+  }
+
   // 渲染状态
   function handleStatus(status) {
-    if (status === 'wait') {
-      return <View className="histroy-list-common wait">未开始</View>
-    } else if (status === 'meeting') {
-      return <View className="histroy-list-common meeting">进行中</View>
-    } else {
-      return <View className="histroy-list-common end">已结束</View>
-    }
-
+    return <View className={`"histroy-list-common" + ${status}`}>{statusMap[status]}</View>
   }
 
 
