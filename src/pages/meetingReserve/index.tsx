@@ -65,7 +65,7 @@ function index() {
     ],
   };
 
-  // 完成点击
+  // 完成默认时间
   function onDefaultClick() {
     Taro.reLaunch({
       url: "/pages/index/index",

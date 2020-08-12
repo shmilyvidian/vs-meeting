@@ -100,7 +100,7 @@ export const formFields = {
   time: {
     key: "time",
     label: "会议时间",
-    value: "啊啊啊啊",
+    value: "",
     disabled: false,
     hidden: false,
     showType: "route",
@@ -109,7 +109,7 @@ export const formFields = {
   house: {
     key: "house",
     label: "会议室",
-    value: "啊啊啊啊",
+    value: "",
     disabled: false,
     hidden: false,
     showType: "route",
@@ -147,7 +147,7 @@ export const formFields = {
   takePartInPerson: {
     key: "takePartInPerson",
     label: "参会人",
-    value: "啊啊啊啊",
+    value: "",
     disabled: false,
     hidden: false,
     showType: "route",
@@ -157,7 +157,7 @@ export const formFields = {
   introduce: {
     key: "introduce",
     label: "会议介绍",
-    value: "啊啊啊啊",
+    value: "",
     disabled: false,
     hidden: false,
     showType: "route",
@@ -166,7 +166,7 @@ export const formFields = {
   remind: {
     key: "remind",
     label: "会议提醒",
-    value: "啊啊啊啊",
+    value: "",
     disabled: false,
     hidden: false,
     showType: "picker",

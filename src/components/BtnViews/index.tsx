@@ -8,6 +8,7 @@ type btnType = {
   disabled: boolean;
   hidden: boolean;
   click: () => void;
+  class: string;
 };
 
 interface IProps {
@@ -20,7 +21,7 @@ export const BtnViews = React.memo(({ btnList = [] }: IProps) => {
       {btnList.map((btnItem) => {
         return btnItem.hidden ? null : (
           <AtButton
-            className="footer-view-btn"
+            className={["footer-view-btn", btnItem.class]}
             key={btnItem.value}
             onClick={btnItem.click && btnItem.click.bind(this)}
             disabled={btnItem.disabled}
