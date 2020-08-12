@@ -17,11 +17,11 @@ function index() {
   const [param, setParam] = useState({});
 
   // 设置picker默认选中
-  const [remindRangeed, setremindRangeed] = useState(remindRanges[0]);
+  const [remindRangeed, setremindRangeed] = useState(0);
 
   // 设置初始状态
   const [fromStatus, setFromStatus] = useState("0");
-
+  console.log(222);
   // 从其他页面跳回来带参数的话，得渲染
   useDidShow(() => {
     const currentPagesData =
@@ -29,6 +29,7 @@ function index() {
     const queryFromStatus =
       Taro.getCurrentPages().slice(-1)[0].options.fromStatus || "0";
     setParam(currentPagesData);
+    console.log(111);
     setFromStatus(queryFromStatus);
   });
 
@@ -51,15 +52,18 @@ function index() {
   }, [meetingMessageObj]);
 
   useEffect(() => {
+    console.log(111111111);
     meetingMessageObj.remind.value = remindRangeed;
     setMeetingMessageObj(JSON.parse(JSON.stringify(meetingMessageObj)));
   }, [remindRangeed]);
 
-  // fromStatus: number; //表单状态,0预约会议，1我预约的会议，2参与会议，3查看过去的会议
-  useEffect(() => {
+  function initMeetingMessageObj(queryFromStatus?: any) {
+    // const status = decodeURIComponent(queryFromStatus);
+    console.log(fromStatus);
     switch (fromStatus) {
       case "0":
-        setMeetingMessageObj(formFields);
+        console.log(formFields);
+        setMeetingMessageObj(JSON.parse(JSON.stringify(formFields)));
         Taro.setNavigationBarTitle({
           title: "预约会议",
         });
@@ -83,8 +87,13 @@ function index() {
         });
         break;
       default:
-        setMeetingMessageObj(formFields);
+        setMeetingMessageObj(JSON.parse(JSON.stringify(formFields)));
     }
+  }
+
+  // fromStatus: number; //表单状态,0预约会议，1我预约的会议，2参与会议，3查看过去的会议
+  useEffect(() => {
+    initMeetingMessageObj(fromStatus);
   }, [fromStatus]);
 
   // 输入框变化
@@ -96,7 +105,7 @@ function index() {
   // piaker选择change
   function remindChange(e) {
     const selectedRemind = remindRanges[Number(e.detail.value)];
-    setremindRangeed(selectedRemind);
+    // setremindRangeed(selectedRemind);
   }
 
   // 页面跳转

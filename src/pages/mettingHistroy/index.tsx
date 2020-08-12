@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Image, View } from "@tarojs/components";
+import Taro from "@tarojs/taro";
+import { gennerateTaroNavigateParams } from "@/utils/urlParam";
 
 import "./index.scss";
 
@@ -15,31 +17,43 @@ function Index() {
       date: "8月9号",
       time: "09:30-10:00",
       status: "meeting",
-      address:'荣超大厦1301',
-      mettingNumber:'82910321',
-      people: '8'
-    },{
+      address: "荣超大厦1301",
+      mettingNumber: "82910321",
+      people: "8",
+    },
+    {
       date: "8月10号",
       time: "09:30-10:00",
       status: "wait",
-      address:'荣超大厦1301',
-      mettingNumber:'82910321',
-      people: '6'
+      address: "荣超大厦1301",
+      mettingNumber: "82910321",
+      people: "6",
     },
     {
       date: "8月09号",
       time: "09:30-10:00",
       status: "end",
-      address:'荣超大厦1301',
-      mettingNumber:'82910321',
-      people: '10'
-    }
+      address: "荣超大厦1301",
+      mettingNumber: "82910321",
+      people: "10",
+    },
   ]);
+
+  function goMeetingReserve() {
+    // 1.我预约的会议 2.参与会议 3.查看过去的会议
+    Taro.navigateTo(
+      gennerateTaroNavigateParams("meetingReserve", { fromStatus: "1" })
+    );
+  }
 
   // 渲染最近会议列表
   const meetingListView = meetingList.map((item, index) => {
     return (
-      <LastestMeetingListItem item={item} key={index}></LastestMeetingListItem>
+      <LastestMeetingListItem
+        onClick={goMeetingReserve}
+        item={item}
+        key={index}
+      ></LastestMeetingListItem>
     );
   });
 
@@ -54,7 +68,7 @@ function Index() {
           </View>
           <View className="user-wrapper-right">
             <View className="user-wrapper-date">7月20日</View>
-            <View className='at-icon at-icon-calendar'></View>
+            <View className="at-icon at-icon-calendar"></View>
           </View>
         </View>
         <View className="tabs">

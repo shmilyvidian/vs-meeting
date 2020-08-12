@@ -27,17 +27,28 @@ function Index() {
     },
   ]);
 
+  // 预约会议跳转
+  function goMeetingReserve(fromStatus) {
+    Taro.navigateTo(
+      gennerateTaroNavigateParams("meetingReserve", { fromStatus })
+    );
+  }
+
   // 渲染最近会议列表
   const meetingListView = meetingList.map((item, index) => {
     return (
-      <LastestMeetingListItem item={item} key={index}></LastestMeetingListItem>
+      <LastestMeetingListItem
+        onClick={goMeetingReserve.bind(null, "2")}
+        item={item}
+        key={index}
+      ></LastestMeetingListItem>
     );
   });
 
-  function goMeetingReserve() {
-    Taro.navigateTo(gennerateTaroNavigateParams("meetingReserve", {}));
+  // 会议记录跳转
+  function goMeetingHistroy() {
+    Taro.navigateTo(gennerateTaroNavigateParams("mettingHistroy", {}));
   }
-
   return (
     <View className="index-main">
       {/* 用户 */}
@@ -55,7 +66,7 @@ function Index() {
       <View className="bg-fff lastest-meeting">
         <View className="lastest-meeting-flex">
           <View className="lastest-meeting-title">最近会议</View>
-          <View className="lastest-meeting-more">
+          <View className="lastest-meeting-more" onClick={goMeetingHistroy}>
             全部
             <Image src={more} className="lastest-meeting-more-icon"></Image>
           </View>
