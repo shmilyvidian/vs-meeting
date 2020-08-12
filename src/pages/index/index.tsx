@@ -57,7 +57,10 @@ function Index() {
           <Image className="user-img" src={manHeadPortrait}></Image>
           <View className="user-name">嗨，{userName}</View>
         </View>
-        <View className="appointment-button" onClick={goMeetingReserve}>
+        <View
+          className="appointment-button"
+          onClick={goMeetingReserve.bind(null, "0")}
+        >
           预约会议
         </View>
       </View>
