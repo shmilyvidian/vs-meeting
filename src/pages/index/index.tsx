@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Taro from "@tarojs/taro";
 import { Image, View, Button } from "@tarojs/components";
-
+import { gennerateTaroNavigateParams } from "@/utils/urlParam";
 import "./index.scss";
 
 import LastestMeetingListItem from "./item/index";
@@ -33,6 +34,10 @@ function Index() {
     );
   });
 
+  function goMeetingReserve() {
+    Taro.navigateTo(gennerateTaroNavigateParams("meetingReserve", {}));
+  }
+
   return (
     <View className="index-main">
       {/* 用户 */}
@@ -41,7 +46,9 @@ function Index() {
           <Image className="user-img" src={manHeadPortrait}></Image>
           <View className="user-name">嗨，{userName}</View>
         </View>
-        <View className="appointment-button">预约会议</View>
+        <View className="appointment-button" onClick={goMeetingReserve}>
+          预约会议
+        </View>
       </View>
       {/* end of 用户 */}
       {/* 最近会议 */}

@@ -3,7 +3,7 @@ import { View, Picker } from "@tarojs/components";
 import Taro, { useDidShow } from "@tarojs/taro";
 import { gennerateTaroNavigateParams } from "@/utils/urlParam";
 import { AtInput, AtList, AtListItem } from "taro-ui";
-import formFields from "./formFields";
+import { formFields, fillFormFields } from "./formFields";
 import "./index.scss";
 
 const remindRanges = ["提前30分钟", "提前10分钟", "提前5分钟"];
@@ -60,19 +60,27 @@ function index() {
     switch (fromStatus) {
       case "0":
         setMeetingMessageObj(formFields);
+        Taro.setNavigationBarTitle({
+          title: "预约会议",
+        });
         break;
       case "1":
-        Object.keys(formFields).forEach((_) => {
-          meetingMessageObj[_].disabled = true;
-          meetingMessageObj[_].hidden = false;
+        setMeetingMessageObj(fillFormFields);
+        Taro.setNavigationBarTitle({
+          title: "我预约的会议",
         });
-        setMeetingMessageObj(JSON.parse(JSON.stringify(meetingMessageObj)));
         break;
       case "2":
-        setMeetingMessageObj(formFields);
+        setMeetingMessageObj(fillFormFields);
+        Taro.setNavigationBarTitle({
+          title: "参与会议",
+        });
         break;
       case "3":
-        setMeetingMessageObj(formFields);
+        setMeetingMessageObj(fillFormFields);
+        Taro.setNavigationBarTitle({
+          title: "查看过去的会议",
+        });
         break;
       default:
         setMeetingMessageObj(formFields);

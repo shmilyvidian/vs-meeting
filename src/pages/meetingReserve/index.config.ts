@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: "会议介绍",
+  navigationBarTitleText: "会议",
 };

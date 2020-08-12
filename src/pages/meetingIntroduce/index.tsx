@@ -62,7 +62,7 @@ function index({ reserveProp = "" }: IProps) {
         maxLength={200}
         placeholder="请输入会议介绍"
       ></AtTextarea>
-      {<BtnViews btnList={btns}></BtnViews>}
+      <BtnViews btnList={btns}></BtnViews>
     </View>
   );
 }

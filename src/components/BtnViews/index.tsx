@@ -17,16 +17,16 @@ interface IProps {
 export const BtnViews = React.memo(({ btnList = [] }: IProps) => {
   return (
     <View className="footer-view">
-      {btnList.map((_) => {
-        return _.hidden ? null : (
+      {btnList.map((btnItem) => {
+        return btnItem.hidden ? null : (
           <AtButton
             className="footer-view-btn"
-            key={_.value}
-            onClick={_.click && _.click.bind(this)}
-            disabled={_.disabled}
+            key={btnItem.value}
+            onClick={btnItem.click && btnItem.click.bind(this)}
+            disabled={btnItem.disabled}
             type="primary"
           >
-            {_.value}
+            {btnItem.value}
           </AtButton>
         );
       })}
