@@ -1,0 +1,76 @@
+@import "~taro-ui/dist/style/components/toast.scss";
+@import "~taro-ui/dist/style/components/indexes.scss";
+@import "~taro-ui/dist/style/components/list.scss";
+
+@import "~taro-ui/dist/style/components/checkbox.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+
+.contact-page {
+  height: 100vh;
+  margin: 0 32px;
+
+  .contact-input-name {
+    background: #fff;
+  
+    .at-input {
+      margin: 0;
+  
+      input {
+        padding-left: 44px;
+        border-radius: 22.4px;
+        background: #F7F7F7;
+    
+        .placeholder-class {
+          font-size: 28px;
+          color: #909399;
+        }    
+      }
+    }
+  }
+  
+  .contact-all-name {
+    display: flex;
+    justify-content: space-between;
+
+    .at-checkbox__option {
+      padding-left: 0;
+    }
+
+    .contact-all-name-title {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      font-size: 28px;
+      color: #909399;
+    }
+  }
+
+  .contact-list-name {
+    .contact-item-name {
+      .contact-item-title {
+        height: 64px;
+        line-height: 64px;
+        font-size: 32px;
+        color: #909399;
+      }
+
+      .at-checkbox__option {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+
+.mb-15 {
+  margin-bottom: 16px;
+}
+
+.ml-0 {
+  margin-left: 0;
+  padding-left: 32px;
+}
+
+// .at-indexes__menu{
+//   top: 10% !important;
+// }

@@ -22,6 +22,11 @@ export default {
       root: "pages/meetingIntroduce",
       pages: ["index"],
     },
+    {
+      // 联系人
+      root: "pages/contactPerson",
+      pages: ["index"],
+    },
   ],
   window: {
     backgroundTextStyle: "light",

@@ -27,7 +27,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -74,6 +74,13 @@
 					"id": -1,
 					"name": "pages/mettingHistroy/index",
 					"pathName": "pages/mettingHistroy/index",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "联系人",
+					"pathName": "pages/contactPerson/index",
+					"query": "",
 					"scene": null
 				}
 			]
