@@ -53,7 +53,14 @@ function Index() {
       address: "荣超大厦1301",
       mettingNumber: "82910321",
       people: "10",
-    },
+    },{
+      date: "8月09号",
+      time: "09:30-10:00",
+      status: "end",
+      address: "荣超大厦1301",
+      mettingNumber: "82910321",
+      people: "10",
+    }
   ]);
 
   // 1.我预约的会议 2.参与会议 3.查看过去的会议
