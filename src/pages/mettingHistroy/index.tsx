@@ -30,7 +30,7 @@ function Index() {
     }
   ])
 
-  const [meetingList] = useState([
+  const [meetingList, setMeetingList] = useState([
     {
       date: "8月9号",
       time: "09:30-10:00",
@@ -63,6 +63,8 @@ function Index() {
       people: "10",
     }
   ]);
+  
+  const [meetingListCopy, setMeetingListCopy] = useState(meetingList)
 
   // 1.我预约的会议 2.参与会议 3.查看过去的会议
   function goMeetingReserve() {
@@ -74,6 +76,17 @@ function Index() {
   // 切换预约列表
   function onChangeTabs(status){
     setTabsType(tabsType = status)
+    console.log(status)
+    setMeetingList(meetingListCopy.filter((_item, i) => {
+      switch(status){
+        case '2':
+          return i%2
+        case '3':
+          return !(i%2)
+        default:
+          return true
+      }
+    }))
     console.log(tabsType)
   }
 
