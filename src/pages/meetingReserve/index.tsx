@@ -35,7 +35,7 @@ function index() {
         disabled: false,
         hidden: false,
         class: "default-btn",
-        click: onDefaultClick,
+        click: onBackViewClick,
       },
     ],
     2: [
@@ -51,7 +51,7 @@ function index() {
         disabled: false,
         hidden: false,
         class: "default-btn",
-        click: onDefaultClick,
+        click: onBackViewClick,
       },
     ],
     3: [
@@ -72,6 +72,12 @@ function index() {
       url: "/pages/index/index",
     });
   }
+  function onBackViewClick() {
+    Taro.navigateBack({
+      delta: 1,
+    });
+  }
+
   // 分享会议
   function onShareMeeting() {
     console.log("分享会议......");
@@ -82,37 +88,6 @@ function index() {
     setFromStatus("0");
   }
 
-  // 初始化meetingMessageObj 表单状态,0预约会议，1我预约的会议，2参与会议，3查看过去的会议
-  function initMeetingMessageObj() {
-    switch (fromStatus) {
-      case "0":
-        setMeetingMessageObj(JSON.parse(JSON.stringify(formFields)));
-        Taro.setNavigationBarTitle({
-          title: "预约会议",
-        });
-        break;
-      case "1":
-        setMeetingMessageObj(fillFormFields);
-        Taro.setNavigationBarTitle({
-          title: "我预约的会议",
-        });
-        break;
-      case "2":
-        setMeetingMessageObj(fillFormFields);
-        Taro.setNavigationBarTitle({
-          title: "参与会议",
-        });
-        break;
-      case "3":
-        setMeetingMessageObj(fillFormFields);
-        Taro.setNavigationBarTitle({
-          title: "查看过去的会议",
-        });
-        break;
-      default:
-        setMeetingMessageObj(JSON.parse(JSON.stringify(formFields)));
-    }
-  }
   const [btns, setBtn] = useState(btnList["0"]);
 
   // 设置meetingMessage
@@ -126,22 +101,61 @@ function index() {
 
   // 设置初始状态
   const [fromStatus, setFromStatus] = useState("");
+
+  const [fromType, setFromType] = useState("");
+
   // 从其他页面跳回来带参数的话，得渲染
   useDidShow(() => {
     const currentPagesData =
       Taro.getCurrentPages().slice(-1)[0].data.query || {};
     const queryFromStatus =
       Taro.getCurrentPages().slice(-1)[0].options.fromStatus || "0";
+    setFromType(Taro.getCurrentPages().slice(-1)[0].options.fromType);
     setParam(currentPagesData);
     setFromStatus(queryFromStatus);
   });
 
+  // 初始化meetingMessageObj 表单状态,0预约会议，1我预约的会议，2参与会议，3查看过去的会议
+  function initMeetingMessageObj() {
+    switch (fromStatus) {
+      case "0":
+        setMeetingMessageObj(JSON.parse(JSON.stringify(formFields)));
+        Taro.setNavigationBarTitle({
+          title: "预约会议",
+        });
+        break;
+      case "1":
+        setMeetingMessageObj(JSON.parse(JSON.stringify(fillFormFields)));
+        Taro.setNavigationBarTitle({
+          title: "我预约的会议",
+        });
+        break;
+      case "2":
+        setMeetingMessageObj(JSON.parse(JSON.stringify(fillFormFields)));
+        Taro.setNavigationBarTitle({
+          title: "参与会议",
+        });
+        break;
+      case "3":
+        setMeetingMessageObj(JSON.parse(JSON.stringify(fillFormFields)));
+        Taro.setNavigationBarTitle({
+          title: "查看过去的会议",
+        });
+        break;
+      default:
+        setMeetingMessageObj(JSON.parse(JSON.stringify(formFields)));
+    }
+  }
+
   useEffect(() => {
     const paramKeys = Object.keys(param);
     if (paramKeys.length) {
-      paramKeys.forEach((_) => {
-        if (meetingMessageObjkeys.includes(_)) {
-          meetingMessageObj[_].value = param[_];
+      paramKeys.forEach((pKey) => {
+        if (meetingMessageObjkeys.includes(pKey)) {
+          meetingMessageObj[pKey].value = param[pKey];
+          if (pKey === "time") {
+            meetingMessageObj[pKey].hidden = !meetingMessageObj[pKey].value;
+          }
         }
       });
       setMeetingMessageObj(JSON.parse(JSON.stringify(meetingMessageObj)));
@@ -154,7 +168,6 @@ function index() {
       const flat = meetingMessageObjkeys.every(
         (key) => meetingMessageObj[key].value
       );
-      console.log(flat);
       btnList["0"][0].disabled = !flat;
       setBtn(btnList["0"]);
     }
@@ -170,8 +183,21 @@ function index() {
   useEffect(() => {
     if (fromStatus === "") return;
     initMeetingMessageObj();
+
+    // wait: "未开始",meeting: "进行中",end: "已结束",
+    switch (fromType) {
+      case "wait":
+        break;
+      case "meeting":
+        break;
+      case "end":
+        btnList["1"][1].hidden = true;
+        btnList["2"][1].hidden = true;
+        break;
+    }
+
     setBtn(btnList[fromStatus]);
-  }, [fromStatus]);
+  }, [fromStatus, fromType]);
 
   // 输入框变化
   function iptChange(key, val) {
@@ -219,12 +245,18 @@ function index() {
                   disabled={item.disabled}
                   title={item.label}
                   value={item.value}
+                  placeholder="请选择"
                 >
                   <View
                     className="go-next-route"
                     onClick={routeClick.bind(this, item.route, item.value)}
                   >
-                    <View className="go-next-route-text">{item.value}</View>
+                    {item.value ? (
+                      <View className="go-next-route-text">{item.value}</View>
+                    ) : (
+                      <View className="go-next-route-text">请选择</View>
+                    )}
+
                     <View className="at-icon at-icon-chevron-right"></View>
                   </View>
                 </AtInput>

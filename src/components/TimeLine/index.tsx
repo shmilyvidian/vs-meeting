@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "@tarojs/components";
+import { useDidShow } from "@tarojs/taro";
 import "./index.scss";
 interface IProps {
   onChange: (a: any, b: any) => void;
@@ -110,8 +111,9 @@ export const TimeLine = function ({ onChange }: IProps) {
     2: "can-make-color", //可预约 #00B853
     3: "seleted-color", //已预约 #F9BB4C
   };
-
-  const [timeTables, setTimeTables] = useState(timeTablesData);
+  const [timeTables, setTimeTables] = useState(
+    JSON.parse(JSON.stringify(timeTablesData))
+  );
   const [startIndex, setStartIndex] = useState(9999);
   const [endIndex, setEndIndex] = useState(9999);
   const [currentText, setCurrentText] = useState("");
@@ -210,6 +212,12 @@ export const TimeLine = function ({ onChange }: IProps) {
     initCurrentText();
   }, [startIndex, endIndex]);
 
+  useDidShow(() => {
+    setTimeTables(JSON.parse(JSON.stringify(timeTablesData)));
+    setStartIndex(9999);
+    setEndIndex(9999);
+    setCurrentText("");
+  });
   function createMarkup(val) {
     return { __html: "First &middot; Second" };
   }

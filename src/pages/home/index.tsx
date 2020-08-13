@@ -3,7 +3,6 @@ import { View, Text } from "@tarojs/components";
 // import { observer, inject } from "mobx-react";
 // import { HomeStore } from "@/store/homeStore";
 import { AtButton } from "taro-ui";
-console.log(AtButton);
 type propsType = {
   store: {
     // homeStore;

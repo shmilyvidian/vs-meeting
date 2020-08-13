@@ -170,7 +170,6 @@ const Index = () => {
   });
 
   useEffect(() => {
-    console.log("useEffect-");
     setTimeout(() => {
       Taro.createSelectorQuery()
         .selectAll(".contact-list-name")

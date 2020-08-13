@@ -16,12 +16,14 @@ function Index() {
     {
       title: "同业需求评审",
       date: "09:30-10:00",
+      fromStatus: "2",
       user: "Rain",
       status: "meeting",
     },
     {
       title: "经分需求评审",
       date: "09:30-10:00",
+      fromStatus: "2",
       user: "艾杰",
       status: "wait",
     },
@@ -38,7 +40,7 @@ function Index() {
   const meetingListView = meetingList.map((item, index) => {
     return (
       <LastestMeetingListItem
-        onClick={goMeetingReserve.bind(null, "2")}
+        onClick={goMeetingReserve.bind(null, item.fromStatus)}
         item={item}
         key={index}
       ></LastestMeetingListItem>

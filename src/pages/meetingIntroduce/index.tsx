@@ -45,7 +45,6 @@ function index({ reserveProp = "" }: IProps) {
       decodeURIComponent(
         Taro.getCurrentPages().slice(-1)[0].options.introduce
       ) || "";
-    // console.log(decodeURIComponent(val), val);
     setReserve(val);
   });
 
