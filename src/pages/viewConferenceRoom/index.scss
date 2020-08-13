@@ -32,6 +32,7 @@ $fontColor: #303133;
     border: 2px solid #CBDCFF;
     border-radius: 1px;
     margin-right: 18px;
+    background: #3476FE;
   }
 
   &-info {
@@ -123,14 +124,12 @@ $fontColor: #303133;
     width: 522px;
     border-radius: 2px;
     background: #D8D8D8;
-
     display: flex;
     align-items: center;
     justify-content: center;
     color: $fontColor;
     font-size: 32px;
-
-
+    margin-bottom: 90px;
   }
 
   &-legend {
@@ -173,4 +172,10 @@ $fontColor: #303133;
   height: 28px;
   margin-right: 8px;
   margin-top: 2px;
+}
+
+.vr-img{
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
 }

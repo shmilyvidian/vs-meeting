@@ -6,6 +6,7 @@ import "./index.scss";
 
 import room from "@/asstes/images/room.svg";
 import people from "@/asstes/images/people.svg";
+import vrImg from "@/asstes/images/vr.svg";
 
 function Index() {
 
@@ -41,9 +42,7 @@ function Index() {
         <View className="conference-room-title">会议室308</View>
         <View className="conference-room-second">
           <View className="conference-room-second-vr">
-            <View className="vr-icon">
-              VR
-            </View>
+            <Image src={vrImg} className="vr-img"></Image>
             VR查看
           </View>
           <View className="conference-room-date">8月6号</View>

@@ -27,7 +27,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -96,6 +96,12 @@
 					"name": "选择会议时间",
 					"pathName": "pages/meetingTime/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/viewConferenceRoom/index",
+					"pathName": "pages/viewConferenceRoom/index",
 					"scene": null
 				}
 			]
