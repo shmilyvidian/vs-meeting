@@ -101,7 +101,7 @@ export const formFields = {
     key: "time",
     label: "会议时间",
     value: "",
-    disabled: false,
+    disabled: true,
     hidden: false,
     showType: "route",
     route: "meetingTime",
@@ -113,7 +113,7 @@ export const formFields = {
     disabled: false,
     hidden: false,
     showType: "route",
-    route: "meetingHouse",
+    route: "meetingRoomSelect",
     class: "mb-15",
   },
   contractPerson: {
@@ -151,7 +151,7 @@ export const formFields = {
     disabled: false,
     hidden: false,
     showType: "route",
-    route: "meetingTakePartInPerson",
+    route: "contactPerson",
     class: "mb-15",
   },
   introduce: {

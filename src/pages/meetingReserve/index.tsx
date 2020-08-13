@@ -67,7 +67,8 @@ function index() {
 
   // 完成默认event
   function onDefaultClick() {
-    Taro.navigateTo({
+    // var pages = Taro.getCurrentPages();
+    Taro.reLaunch({
       url: "/pages/index/index",
     });
   }
@@ -204,7 +205,7 @@ function index() {
                   value={item.value}
                   disabled={item.disabled}
                   onChange={iptChange.bind(this, key)}
-                  placeholder=""
+                  placeholder={`请输入${item.label}`}
                 ></AtInput>
               )
             );
