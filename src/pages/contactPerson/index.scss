@@ -58,6 +58,16 @@
     overflow: hidden;
     padding: 0 32px;
 
+    .contact-name-img {
+      position: relative;
+
+      .contact-item-name-img {
+        position: absolute;
+        width: 64px;
+        height: 64px;
+      }
+    }
+
     .contact-item-name {
       .contact-item-title {
         height: 64px;
@@ -71,6 +81,10 @@
 
         .at-checkbox__option {
           padding-left: 0;
+
+          .at-checkbox__title {
+            padding-left: 88px;
+          }
         }
       }
     }

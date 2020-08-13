@@ -1,4 +1,4 @@
-import { View, ScrollView } from "@tarojs/components";
+import { View, ScrollView, Image } from "@tarojs/components";
 // import { AtIndexes } from 'taro-ui'
 import React, { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
@@ -7,6 +7,8 @@ import { AtInput, AtCheckbox, AtButton } from "taro-ui";
 
 import LetterList from "./letterList/index";
 import "./index.scss";
+import { NameItemImg } from './indexSty'
+import manHeadPortrait from "@/asstes/images/headPortrait/man.svg";
 
 const Index = () => {
   const [name, setName] = useState<string>(""); // 搜索值
@@ -153,11 +155,21 @@ const Index = () => {
       ],
     },
   ];
+  function personImgList(_item) {
+    return _item.items.map((imgt, imgId) => {
+      return (
+        <NameItemImg className="contact-item-name-img" src={manHeadPortrait} ind={imgId}></NameItemImg>
+      )
+    })
+  } 
   const listContact = searchList.map((_item, i) => {
     return (
       <View className="contact-item-name" key={i}>
         <View key={i + "title"} className="contact-item-title" id={_item.key}>
           {_item.key}
+        </View>
+        <View className="contact-name-img">
+          {personImgList(_item)}
         </View>
         <AtCheckbox
           options={_item.items}
