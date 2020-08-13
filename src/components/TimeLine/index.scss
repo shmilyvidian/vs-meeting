@@ -59,8 +59,8 @@ $scaleColor:#303133;
 .pie-base-2 {
   @extend .position-center;
   padding: 0;
-  width: $width + px;
-  height: $width + px;
+  width: ($width + 10) + px;
+  height: ($width + 10) + px;
   border-radius: 100%;
   list-style: none;
   overflow: hidden;
@@ -129,15 +129,20 @@ $scaleColor:#303133;
 
 .pie-base-shade-4 {
   @extend .position-center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0;
-  width: ($width - 80) + px;
-  height: ($width - 80) + px;
+  width: ($width - 90) + px;
+  height: ($width - 90) + px;
   border-radius: 100%;
   list-style: none;
   overflow: hidden;
   background-color: #fff;
   z-index: 6;
   margin: 0;
+  font-size: 25px;
+  color: #909399;
 }
 
 .slice-1 {
@@ -439,4 +444,8 @@ $scaleColor:#303133;
   @extend .position-center;
   left: 24px;
   z-index: 7;
+
+  .morning {
+    border-bottom: 1px solid $scaleColor;
+  }
 }
