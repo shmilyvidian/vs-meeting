@@ -55,7 +55,7 @@
 
   .contact-list-name {
     flex: auto;
-    overflow: auto;
+    overflow: hidden;
     padding: 0 32px;
 
     .contact-item-name {
@@ -81,17 +81,3 @@
     padding: 0 32px 50px;
   }
 }
-
-
-.mb-15 {
-  margin-bottom: 16px;
-}
-
-.ml-0 {
-  margin-left: 0;
-  padding-left: 32px;
-}
-
-// .at-indexes__menu{
-//   top: 10% !important;
-// }

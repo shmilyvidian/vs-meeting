@@ -147,14 +147,15 @@ const Index = () => {
     setRoomSelectArrValue(roomselectText)
   },[roomSelectArr])
 
+  // 选择日期栏可选日期
   function roomValBtnClick(item) {
     if(!item.disable){
       setweekListValue(item.value)
     }
   }
 
+  // 选择会议职场楼层
   function roomSelect(e) {
-    console.log('e', e)
     setRoomSelectArr(e.detail.value)
   }
 

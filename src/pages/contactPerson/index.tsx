@@ -1,6 +1,6 @@
-import { View } from '@tarojs/components'
+import { View, ScrollView } from '@tarojs/components'
 // import { AtIndexes } from 'taro-ui'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Taro from "@tarojs/taro";
 import { AtInput, AtCheckbox, AtButton } from 'taro-ui'
 import { gennerateTaroNavigateParams } from "@/utils/urlParam";
@@ -9,12 +9,12 @@ import LetterList from './letterList/index'
 import './index.scss'
 
 const Index = () => {
-  const [name, setName] = useState<string>('')
-  const [checkedList, setCheckedList] = useState([])
-  const [checkedAllList, setCheckedAllListx] = useState([])
-  // function onClick() {
-
-  // }
+  const [name, setName] = useState<string>('') // 搜索值
+  const [checkedList, setCheckedList] = useState([]) // 选中的key
+  const [checkedAllList, setCheckedAllListx] = useState([]) // 全选的key
+  const [listScrollHeight, setListScrollHeight] = useState<string>('0px') // 联系人列表的高度
+  const [tolistScrollView, setTolistScrollView] = useState('') // 点击右侧索引列表要跳至的key
+  
   const list = [
     {
       title: 'A',
@@ -54,24 +54,6 @@ const Index = () => {
       ]
     },
     {
-      title: 'C',
-      key: 'C',
-      items: [
-        {
-          'name': '北京',
-          'value': 'clist1',
-          'label': 'c阿坝1',
-          'key': 'bkey1',
-        },
-        {
-          'name': '保定',
-          'value': 'clist2',
-          'label': 'c阿坝2',
-          'key': 'bkey2',
-        }
-      ]
-    },
-    {
       title: 'D',
       key: 'D',
       items: [
@@ -106,11 +88,50 @@ const Index = () => {
           'key': 'bkey2',
         }
       ]
+    },
+    {
+      title: 'F',
+      key: 'F',
+      items: [
+        {
+          'name': '北京',
+          'value': 'flist1',
+          'label': 'f阿坝1',
+          'key': 'bkey1',
+        },
+        {
+          'name': '保定',
+          'value': 'flist2',
+          'label': 'f阿坝2',
+          'key': 'bkey2',
+        }
+      ]
+    },
+    {
+      title: 'G',
+      key: 'G',
+      items: [
+        {
+          'name': '北京',
+          'value': 'glist1',
+          'label': 'g阿坝1',
+          'key': 'bkey1',
+        },
+        {
+          'name': '保定',
+          'value': 'glist2',
+          'label': 'g阿坝2',
+          'key': 'bkey2',
+        }
+      ]
     }
   ]
+
   const [searchList, setSearchList] = useState(list)
-  let allSelectListValue = []
+  let allSelectListValue = [] // 存储所有的联系人的选中值value
+  let allListKey = [] // 存储所有的联系人所在的key分类
   list.map((allItem, allIndex) => {
+    allListKey.push(allItem.key)
     if (allItem.items.length) {
       allItem.items.map((v, i) => {
         allSelectListValue.push(v.value)
@@ -133,7 +154,7 @@ const Index = () => {
   const listContact = searchList.map((_item, i) => {
     return (
       <View className='contact-item-name' key={i}>
-        <View key={i + 'title'} className='contact-item-title'>{_item.key}</View>
+        <View key={i + 'title'} className='contact-item-title' id={_item.key}>{_item.key}</View>
         <AtCheckbox
           options={_item.items}
           key={i + 'name'}
@@ -143,12 +164,23 @@ const Index = () => {
       </View>
     )
   })
+  
+  useEffect(() => {
+    console.log('useEffect-')
+    setTimeout(() => {
+      Taro.createSelectorQuery().selectAll('.contact-list-name').boundingClientRect(function(rects){
+        setListScrollHeight(`${rects[0].height}px`)
+      }).exec()
+    }, 100)
+  }, [searchList]);
 
+  // 联系人全选
   function setCheckedAllList(val) {
     setCheckedList(val.length ? allSelectListValue : [])
     setCheckedAllListx(val)
   }
 
+  // 搜索联系人
   function searchName(val) {
     setName(val)
     const filItemList = list.map((filItem, filIndex) => {
@@ -171,8 +203,14 @@ const Index = () => {
     Taro.navigateTo(gennerateTaroNavigateParams("meetingReserve", {}));
   }
 
+  // 点击展示key所对应的联系人
+  function toShowViewOfKey(e) {
+    setTolistScrollView(e)
+  }
+
   return (
     <View className="contact-page">
+      {/* 联系人搜索栏 */}
       <View className='contact-input-name'>
         <AtInput
           name='value'
@@ -184,6 +222,8 @@ const Index = () => {
           onChange={(val) => searchName(val)}
         />
       </View>
+      {/* end 联系人搜索栏 */}
+      {/* 联系人全选栏 */}
       <View className='contact-all-name'>
         {
           allSelectList.map((_item, i) => {
@@ -197,14 +237,30 @@ const Index = () => {
         }
         <View className='contact-all-name-title'>已选（{checkedList.length}）</View>
       </View>
-      <View className='contact-list-name'>
-        {
-          listContact
-        }
+      {/* end 联系人全选栏 */}
+      {/* 联系人滚动列表 */}
+      <View className='contact-list-name' id='contactScrollView'>
+        <ScrollView
+          scrollY
+          scrollIntoView={tolistScrollView}
+          style={
+            {height: listScrollHeight}
+          }
+        >
+          {
+            listContact
+          }
+        </ScrollView>
       </View>
+      {/* end 联系人滚动列表 */}
+      {/* 右侧索引列 */}
       <View className='contact-leter-name'>
-        <LetterList />
+        <LetterList
+          allListKey={allListKey}
+          showViewOfKey={toShowViewOfKey}
+        />
       </View>
+      {/* end 右侧索引列 */}
       {/* 选择联系人完成按钮 */}
       <View className='contact-leter-btn'>
         <AtButton type='primary' disabled={!checkedList.length} onClick={goMeetingReserve}>完成</AtButton>
