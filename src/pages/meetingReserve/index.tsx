@@ -65,9 +65,9 @@ function index() {
     ],
   };
 
-  // 完成默认时间
+  // 完成默认event
   function onDefaultClick() {
-    Taro.reLaunch({
+    Taro.navigateTo({
       url: "/pages/index/index",
     });
   }

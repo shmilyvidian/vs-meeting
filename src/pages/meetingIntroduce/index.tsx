@@ -17,6 +17,7 @@ function index({ reserveProp = "" }: IProps) {
       value: "确定",
       disabled: true,
       hidden: false,
+      class: "",
       click: btnConfirm,
     },
   ];

@@ -1,0 +1,156 @@
+$fontColor: #303133;
+$assistantFontColor : #909399;
+
+.bg-fff {
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.room {
+  &-wrapper {
+    display: flex;
+    padding: 40px 34px;
+  }
+
+  &-img {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #CBDCFF;
+    border-radius: 1px;
+    margin-right: 18px;
+  }
+
+  &-info {
+    width: 100%;
+  }
+
+  &-other {
+    font-size: 24px;
+    color: $assistantFontColor;
+    display: flex;
+  }
+
+  &-feature {
+    margin-right: 24px;
+  }
+
+  &-info-top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &-number {
+    font-size: 36px;
+    font-weight: bold;
+    color: $fontColor;
+  }
+
+  &-length {
+    font-size: 24px;
+    color: $assistantFontColor;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.people-icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  margin-top: 2px;
+}
+
+
+
+.meetting-configuration {
+  text-align: center;
+  position: relative;
+  background-color: #fff;
+  margin-top: 20px;
+  padding-bottom: 70rpx;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 46px;
+
+    &-room {
+      font-size: 36px;
+      color: $fontColor;
+      font-weight: 700;
+    }
+
+    &-date {
+      font-size: 24px;
+      color: $assistantFontColor;
+      position: absolute;
+      right: 16px;
+    }
+
+  }
+
+  .content {
+    display: flex;
+    padding: 34px 150px 24px;
+    justify-content: space-between;
+
+    &-item {
+      font-size: 28px;
+      margin: 0 16px;
+      color: $assistantFontColor;
+    }
+  }
+
+  &-vr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+
+    &-icon {
+      width: 64px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    &-check {
+      color: #3476FE;
+      font-size: 28px;
+    }
+  }
+
+  .time-position {
+    position: absolute;
+    left: 76%;
+    bottom: 5%;
+    z-index: 12;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      margin: 16px 0;
+
+      &-circle {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+        margin-right: 16px;
+      }
+
+      &-title {
+        font-size: 24px;
+        color: $assistantFontColor;
+      }
+    }
+
+    // .clear-line {
+    //   .at-timeline-item__tail {
+    //     display: none;
+    //   }
+    // }
+  }
+}

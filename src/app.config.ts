@@ -32,6 +32,11 @@ export default {
       root: "pages/meetingRoomSelect",
       pages: ["index"],
     },
+    {
+      // 会议时间
+      root: "pages/meetingTime",
+      pages: ["index"],
+    },
   ],
   window: {
     backgroundTextStyle: "light",
