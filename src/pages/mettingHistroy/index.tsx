@@ -8,6 +8,7 @@ import "./index.scss";
 import LastestMeetingListItem from "./item/index";
 
 import manHeadPortrait from "@/asstes/images/headPortrait/man.svg";
+import calendarIcon from "@/asstes/images/calendar.svg";
 
 
 function Index() {
@@ -98,7 +99,7 @@ function Index() {
           </View>
           <View className="user-wrapper-right">
             <View className="user-wrapper-date">7月20日</View>
-            <View className="at-icon at-icon-calendar"></View>
+            <Image src={calendarIcon} className="calendar-icon"></Image>
           </View>
         </View>
         {/* tabs切换 */}
