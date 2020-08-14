@@ -8,7 +8,14 @@ import { BtnViews } from "@/components/BtnViews/index";
 import arrow from "@/asstes/images/arrow.svg";
 import "./index.scss";
 
-const remindRanges = ["提前30分钟", "提前10分钟", "提前5分钟"];
+const remindRanges = [
+  "会前30分钟",
+  "会前25分钟",
+  "会前20分钟",
+  "会前15分钟",
+  "会前10分钟",
+  "会前5分钟",
+];
 
 function index() {
   let meetingMessageObjkeys = Object.keys(formFields);
