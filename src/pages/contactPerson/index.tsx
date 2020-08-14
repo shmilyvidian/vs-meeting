@@ -1,7 +1,7 @@
 import { View, ScrollView } from "@tarojs/components";
 // import { AtIndexes } from 'taro-ui'
 import React, { useState, useEffect } from "react";
-import Taro from "@tarojs/taro";
+import Taro, { useDidShow } from "@tarojs/taro";
 import { AtInput, AtCheckbox, AtButton } from "taro-ui";
 // import { gennerateTaroNavigateParams } from "@/utils/urlParam";
 
@@ -247,11 +247,13 @@ const Index = () => {
   const [searchList, setSearchList] = useState(list);
   let allSelectListValue: Array<string> = []; // 存储所有的联系人的选中值value
   let allListKey: Array<string> = []; // 存储所有的联系人所在的key分类
+  let allValueInItem = {}; // 存储所有的选中联系人value所在的item
   list.map((allItem) => {
     allListKey.push(allItem.key);
     if (allItem.items.length) {
       allItem.items.forEach((v) => {
         allSelectListValue.push(v.value);
+        allValueInItem[v.value] = v
       });
     }
   });
@@ -296,6 +298,14 @@ const Index = () => {
     }, 100);
   }, [searchList]);
 
+  // 其他页面过来判断是否带参
+  useDidShow(() => {
+    const pages = Taro.getCurrentPages();
+    const prevPage = pages[pages.length - 2]; //上一个页面
+    console.log('pages, prevPage == ', pages, prevPage)
+    
+  })
+
   // 联系人全选
   function setCheckedAllList(val) {
     setCheckedList(val.length ? allSelectListValue : []);
@@ -326,9 +336,14 @@ const Index = () => {
   function goMeetingReserve() {
     var pages = Taro.getCurrentPages();
     var prevPage = pages[pages.length - 2]; //上一个页面
+    let nameText = ''
+    checkedList.forEach((it, id) => {
+      const pot = id ? '，' : ''
+      nameText += (pot + allValueInItem[it].label)
+    })
     //直接使用上一个页面的data，把数据存到上一个页面中去
     prevPage.data.query = {
-      takePartInPerson: "艾杰、刘洋、张赫、...",
+      takePartInPerson: nameText,
     };
     Taro.navigateBack({
       delta: 1,
