@@ -7,7 +7,7 @@ import { formFields, fillFormFields } from "./formFields";
 import { BtnViews } from "@/components/BtnViews/index";
 import "./index.scss";
 
-const remindRanges = ["提前30分钟", "提前10分钟", "提前5分钟"];
+const remindRanges = ["会前30分钟", "会前25分钟", "会前20分钟", "会前15分钟", "会前10分钟", "会前5分钟"];
 
 function index() {
   let meetingMessageObjkeys = Object.keys(formFields);
@@ -122,7 +122,7 @@ function index() {
   const [param, setParam] = useState({});
 
   // 设置picker默认选中
-  const [remindRangeed, setremindRangeed] = useState(remindRanges[0]);
+  const [remindRangeed, setremindRangeed] = useState(remindRanges[2]);
 
   // 设置初始状态
   const [fromStatus, setFromStatus] = useState("");
@@ -241,6 +241,7 @@ function index() {
                     item.disabled ? "remind-picker-disabled" : "",
                   ]}
                   key="remindRangeed"
+                  value={remindRanges.indexOf(remindRangeed)}
                   mode="selector"
                   range={remindRanges}
                   onChange={remindChange.bind(this)}

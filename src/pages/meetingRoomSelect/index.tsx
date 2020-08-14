@@ -9,7 +9,7 @@ import { RoomValBtn } from './indexSty'
 
 const Index = () => {
   const [weekListValue, setweekListValue] = useState('4')
-  const [roomSelectArr, setRoomSelectArr] = useState([0,0])
+  const [roomSelectArr, setRoomSelectArr] = useState([2,2])
   const [roomSelectArrValue, setRoomSelectArrValue] = useState('')
 
   const weekList = [
@@ -51,8 +51,8 @@ const Index = () => {
   ]
 
   const meetingRoomRange = [
-    ['保税区职场', '荣超职场', '南塔职场'],
-    ['2楼', '3楼', '4楼'],
+    ['保税区职场', '荣超职场', '南塔职场', '南山职场', '总行职场'],
+    ['2楼', '3楼', '4楼', '5楼', '6楼'],
   ]
 
   const list = [
@@ -301,6 +301,7 @@ const Index = () => {
         <Picker
           mode="multiSelector"
           range={meetingRoomRange}
+          value={roomSelectArr}
           onChange={roomSelect.bind(this)}
         >
           <View className="meeting-room-select-title">  
