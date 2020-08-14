@@ -52,7 +52,15 @@
     }
 
     .meeting-room-select-title-r {
+      display: flex;
+      align-items: center;
       color: #606266;
+    }
+    
+    .meeting-room-select-title-icon {
+      width: 16px;
+      height: 26px;
+      margin-left: 44px;
     }
   }
 }

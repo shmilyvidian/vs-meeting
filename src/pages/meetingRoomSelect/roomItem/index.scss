@@ -7,6 +7,7 @@
 
   .room-item-title {
     display: flex;
+    align-items: flex-start;
     margin-bottom: 60px;
     font-size: 24px;
     color: #909399;
@@ -38,8 +39,11 @@
 
     .room-item-title-sum {
       display: flex;
+      align-items: center;
 
       .room-item-title-icon {
+        width: 28px;
+        height: 28px;
         margin-right: 12px;
         font-size: 32px;
       }

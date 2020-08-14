@@ -1,9 +1,10 @@
-import { View, Picker } from '@tarojs/components'
+import { View, Picker, Image } from '@tarojs/components'
 // import { AtIndexes } from 'taro-ui'
 import React, { useState, useEffect } from 'react'
 
 import RoomItem from './roomItem/index'
 import './index.scss'
+import arrowRight from "@/asstes/images/arrow_right.svg";
 import { RoomValBtn } from './indexSty'
 
 const Index = () => {
@@ -307,7 +308,8 @@ const Index = () => {
             <View className="meeting-room-select-title-r"
             >  
               {roomSelectArrValue}
-              <View className='at-icon at-icon-chevron-right'></View>
+              {/* <View className='at-icon at-icon-chevron-right'></View> */}
+              <Image className="meeting-room-select-title-icon" src={arrowRight}></Image>
             </View>
           </View>
         </Picker>
