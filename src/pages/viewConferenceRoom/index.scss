@@ -91,7 +91,7 @@ $fontColor: #303133;
     color: $fontColor;
   }
 
-  &-second-vr{
+  &-second-vr {
     font-size: 28px;
     color: $fontColor;
     display: flex;
@@ -112,6 +112,17 @@ $fontColor: #303133;
     justify-content: center;
     color: $fontColor;
     font-size: 32px;
+    overflow: hidden;
+    position: relative;
+
+    &-img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100%;
+      height: inherit;
+      transform: translate(-50%, -50%);
+    }
   }
 
   &-draw {
@@ -130,10 +141,21 @@ $fontColor: #303133;
     color: $fontColor;
     font-size: 32px;
     margin-bottom: 90px;
+    position: relative;
+    overflow: hidden;
+
+    &-img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100%;
+      height: inherit;
+      transform: translate(-50%, -50%);
+    }
   }
 
   &-legend {
-    margin-top: 20px;
+    margin-top: 120px;
   }
 
   &-legend-item {
@@ -154,11 +176,12 @@ $fontColor: #303133;
   .icon-blue {
     background: #32ADFF;
   }
+
   .icon-green {
     background: #0DCD87;
   }
 
-  .icon-sky{
+  .icon-sky {
     background: #4F85F6;
   }
 
@@ -167,14 +190,14 @@ $fontColor: #303133;
   }
 }
 
-.people-icon{
+.people-icon {
   width: 28px;
   height: 28px;
   margin-right: 8px;
   margin-top: 2px;
 }
 
-.vr-img{
+.vr-img {
   width: 40px;
   height: 40px;
   margin-right: 16px;

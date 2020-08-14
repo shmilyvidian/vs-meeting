@@ -67,7 +67,7 @@
 					"id": 1,
 					"name": "会议介绍",
 					"pathName": "pages/meetingIntroduce/index",
-					"query": "introduce=111",
+					"query": "",
 					"scene": null
 				},
 				{

@@ -13,22 +13,36 @@ function Index() {
   const [userName] = useState("张宏兵");
   const localDataF: any = [];
   const [localData, setLocalData] = useState(localDataF);
+
+  const irsType: any = [];
+  const [isRemoves, setIsRemoves] = useState(irsType);
   const meetingListF = [
     {
       theme: "同业PC",
       time: "8月14号 09:30-10:00",
       fromStatus: "1",
       status: "meeting",
-      house: "荣超大厦1301",
+      house: "荣超大厦1303",
       number: "85510321",
       takePartInPerson: "阿瑶，冯绍峰，高圆圆，胡歌",
       fromStatusText: "我预约的会议",
       introduce: "同业PC需求澄清",
     },
     {
+      theme: "DATA-API",
+      time: "8月16号 10:30-12:00",
+      fromStatus: "1",
+      status: "wait",
+      house: "荣超大厦1302",
+      number: "38510321",
+      takePartInPerson: "冯绍峰，高圆圆，胡歌",
+      fromStatusText: "我预约的会议",
+      introduce: "DATA-API需求澄清",
+    },
+    {
       theme: "经分财务",
       time: "8月15号 09:30-10:00",
-      fromStatus: "1",
+      fromStatus: "2",
       type: "1",
       status: "wait",
       house: "荣超大厦1301",
@@ -36,6 +50,7 @@ function Index() {
       takePartInPerson: "井柏然，金秀贤",
       fromStatusText: "参与的会议",
       introduce: "经分财务需求澄清",
+      hidden: false,
     },
   ];
   // 1.我预约的会议 2.参与会议 3.查看过去的会议
@@ -55,10 +70,12 @@ function Index() {
   }
 
   useDidShow(() => {
+    setIsRemoves(Taro.getStorageSync("isRemove") || []);
     setLocalData(Taro.getStorageSync("localData") || []);
   });
 
   useEffect(() => {
+    let mlf: any = meetingListF;
     if (localData && localData.length) {
       const data: any = [];
       localData.map((item) => {
@@ -75,13 +92,17 @@ function Index() {
         };
         data.push(itemObj);
       });
-      setMeetingList([...meetingListF, ...data]);
+      mlf = [...meetingListF, ...data];
     }
-  }, [localData]);
+    mlf.forEach((item) => {
+      item.hidden = isRemoves.includes(item.number);
+    });
+    setMeetingList(mlf);
+  }, [localData, isRemoves]);
 
   // 渲染最近会议列表
   const meetingListView = meetingList.map((item, index) => {
-    return (
+    return item.hidden ? null : (
       <LastestMeetingListItem
         onClick={goMeetingReserve.bind(
           null,

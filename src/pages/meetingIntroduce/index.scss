@@ -1,1 +1,17 @@
+.introduce-textarea {
+  .at-textarea__textarea {
+    height: 400px;
+  }
+}
 
+.disabled-textarea{
+  background-color: transparent;
+  border: none;
+
+  .at-textarea__textarea {
+    height: 600px;
+  }
+  .at-textarea__counter{
+    display: none;
+  }
+}

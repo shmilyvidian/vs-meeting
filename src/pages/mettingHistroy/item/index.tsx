@@ -12,6 +12,7 @@ interface itemType {
   number: string;
   takePartInPerson: string;
   fromStatusText: string;
+  hidden?: false;
 }
 
 interface propsType {

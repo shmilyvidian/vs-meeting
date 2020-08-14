@@ -12,6 +12,8 @@ interface IProps {
 function index({ reserveProp = "" }: IProps) {
   // 设置reserve
   const [reserve, setReserve] = useState(reserveProp);
+
+  const [isDisabled, setIsDisabled] = useState(false);
   const btnList = [
     {
       value: "确定",
@@ -41,11 +43,10 @@ function index({ reserveProp = "" }: IProps) {
   }
 
   useDidShow(() => {
-    const val =
-      decodeURIComponent(
-        Taro.getCurrentPages().slice(-1)[0].options.introduce
-      ) || "";
+    const currentPagesData = Taro.getCurrentPages().slice(-1)[0].options || {};
+    const val = decodeURIComponent(currentPagesData.introduce) || "";
     setReserve(val);
+    setIsDisabled(currentPagesData.disabled === "true");
   });
 
   useEffect(() => {
@@ -53,13 +54,23 @@ function index({ reserveProp = "" }: IProps) {
     setBtn(btnList);
   }, [reserve]);
 
+  useEffect(() => {
+    btnList[0].hidden = isDisabled;
+    setBtn(btnList);
+  }, [isDisabled]);
+
   return (
     <View>
       <AtTextarea
+        className={[
+          "introduce-textarea",
+          isDisabled ? "disabled-textarea" : "",
+        ]}
         value={reserve}
         key="reserve"
         onChange={handleChange.bind(this)}
         maxLength={200}
+        disabled={isDisabled}
         placeholder="请输入会议介绍"
       ></AtTextarea>
       <BtnViews btnList={btns}></BtnViews>

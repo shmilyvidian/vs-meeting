@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image, View } from "@tarojs/components";
-import Taro from "@tarojs/taro";
+import Taro, { useDidShow } from "@tarojs/taro";
 import { gennerateTaroNavigateParams } from "@/utils/urlParam";
 
 import "./index.scss";
@@ -36,11 +36,22 @@ function Index() {
         time: "8月14号 09:30-10:00",
         fromStatus: "1",
         status: "meeting",
-        house: "荣超大厦1301",
+        house: "荣超大厦1303",
         number: "85510321",
         takePartInPerson: "阿瑶，冯绍峰，高圆圆，胡歌",
         fromStatusText: "我预约的会议",
         introduce: "同业PC需求澄清",
+      },
+      {
+        theme: "DATA-API",
+        time: "8月16号 10:30-12:00",
+        fromStatus: "1",
+        status: "wait",
+        house: "荣超大厦1302",
+        number: "38510321",
+        takePartInPerson: "冯绍峰，高圆圆，胡歌",
+        fromStatusText: "我预约的会议",
+        introduce: "DATA-API需求澄清",
       },
     ],
     3: [
@@ -55,13 +66,14 @@ function Index() {
         takePartInPerson: "井柏然，金秀贤",
         fromStatusText: "参与的会议",
         introduce: "经分财务需求澄清",
+        hidden: false,
       },
       {
         theme: "经分同业",
         time: "8月09号 09:30-10:00",
         fromStatus: "3",
         status: "end",
-        house: "荣超大厦1301",
+        house: "荣超大厦1304",
         number: "82911521",
         takePartInPerson: "孔连顺，欧阳娜娜",
         fromStatusText: "参与的会议",
@@ -72,7 +84,7 @@ function Index() {
         time: "8月01号 09:30-10:00",
         fromStatus: "3",
         status: "end",
-        house: "荣超大厦1301",
+        house: "荣超大厦1305",
         number: "82910321",
         takePartInPerson: "宋仲基，王俊凯，欧阳娜娜",
         fromStatusText: "参与的会议",
@@ -80,12 +92,16 @@ function Index() {
       },
     ],
   };
+  const localDataF: any = [];
+  const [localData, setLocalData] = useState(localDataF);
+  const [data, setData] = useState([]);
+  const irsType: any = [];
+  const [isRemoves, setIsRemoves] = useState(irsType);
+
   const [meetingList, setMeetingList] = useState([
     ...tabDataObj["2"],
     ...tabDataObj["3"],
   ]);
-
-  const [meetingListCopy, setMeetingListCopy] = useState(meetingList);
 
   // 1.我预约的会议 2.参与会议 3.查看过去的会议
   function goMeetingReserve(status, fromStatus, item) {
@@ -100,19 +116,77 @@ function Index() {
     );
   }
 
+  useDidShow(() => {
+    setLocalData(Taro.getStorageSync("localData") || []);
+    const irs = Taro.getStorageSync("isRemove") || [];
+    if (irs.length) {
+      setIsRemoves(irs);
+    }
+  });
+
+  useEffect(() => {
+    const fData: any = [];
+    localData.map((item) => {
+      const itemObj = {
+        theme: item.theme.value,
+        time: item.time.value,
+        house: item.house.value,
+        number: item.number.value,
+        takePartInPerson: item.takePartInPerson.value,
+        introduce: item.introduce.value,
+        status: "wait",
+        fromStatus: "1",
+        fromStatusText: "我预约的会议",
+      };
+      fData.push(itemObj);
+    });
+    setData(fData);
+    let reTabData: any = [];
+    if (tabsType === "1") {
+      reTabData = [...tabDataObj["2"], ...fData, ...tabDataObj["3"]];
+    } else if (tabsType === "2") {
+      reTabData = [...tabDataObj[tabsType], ...fData];
+    } else {
+      reTabData = tabDataObj[tabsType];
+    }
+
+    reTabData.forEach((item) => {
+      item.hidden = isRemoves.includes(item.number);
+    });
+
+    setMeetingList(reTabData);
+  }, [localData, isRemoves]);
+
+  // useEffect(() => {
+  //   meetingList.forEach((item) => {
+  //     item.hidden = isRemoves.includes(item.number);
+  //   });
+  //   setMeetingList(meetingList);
+  // }, [isRemoves]);
+
   // 切换预约列表
   function onChangeTabs(status) {
     setTabsType((tabsType = status));
+    let reTabData: any = [];
     if (status === "1") {
-      setMeetingList([...tabDataObj["2"], ...tabDataObj["3"]]);
+      reTabData = [...tabDataObj["2"], ...data, ...tabDataObj["3"]];
+    } else if (status === "2") {
+      reTabData = [...tabDataObj[status], ...data];
     } else {
-      setMeetingList(tabDataObj[status]);
+      reTabData = tabDataObj[status];
     }
+
+    reTabData.forEach((item) => {
+      item.hidden = isRemoves.includes(item.number);
+    });
+    console.log(123456);
+    console.log(reTabData);
+    setMeetingList(reTabData);
   }
 
   // 渲染最近会议列表
   const meetingListView = meetingList.map((item, index) => {
-    return (
+    return item.hidden ? null : (
       <LastestMeetingListItem
         onClick={goMeetingReserve.bind(
           null,

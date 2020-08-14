@@ -20,13 +20,19 @@
     .at-input {
       margin: 0;
 
+      &::after {
+        content: none;
+      }
+
       input {
         padding-left: 44px;
-        border-radius: 22.4px;
+        border-radius: 64px;
         background: #F7F7F7;
+        height: 64px;
+        line-height: 64px;
 
         .placeholder-class {
-          font-size: 28px;
+          font-size: 30px;
           color: #909399;
         }
       }
@@ -93,4 +99,31 @@
     flex: none;
     padding: 0 32px 50px;
   }
+}
+
+
+.at-checkbox::before {
+  content: none !important;
+}
+
+.at-checkbox::after {
+  content: none !important;
+}
+
+
+.at-checkbox__option::before {
+  content: none !important;
+}
+
+.at-checkbox__option::after {
+  content: none !important;
+}
+
+
+.at-checkbox__option-wrap::before {
+  content: none !important;
+}
+
+.at-checkbox__option-wrap::after {
+  content: none !important;
 }

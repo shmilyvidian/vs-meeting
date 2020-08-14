@@ -1,12 +1,16 @@
 .lette-list {
   position: fixed;
   top: 53%;
-  right: 32px;
+  right: 32rpx;
   overflow: hidden;
-  -webkit-transform: translate3d(0,-50%,0);
-  transform: translate3d(0,-50%,0);
   z-index: 805;
-  
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 370px);
+  top: 220px;
+  justify-content: space-between;
+
+
   .lette-list-item {
     text-align: center;
     font-size: 24px;

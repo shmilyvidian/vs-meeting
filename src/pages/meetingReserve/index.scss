@@ -2,6 +2,8 @@ page {
   background-color: #f6f6f6;
 }
 
+$fontColor:#909399;
+
 .mb-15 {
   margin-bottom: 16px;
 }
@@ -22,10 +24,10 @@ page {
 
   .at-input__input {
     padding-right: 0;
-    color: #606266;
+    color: $fontColor;
 
     .input-placeholder {
-      color: #606266;
+      color: $fontColor;
     }
   }
 
@@ -72,7 +74,7 @@ page {
       justify-content: flex-end;
       align-items: center;
       text-align: right;
-      color: #606266;
+      color: $fontColor;
       padding: 0;
       overflow: hidden;
       white-space: nowrap;
@@ -113,7 +115,7 @@ page {
         display: flex;
 
         .item-extra__info {
-          color: #606266;
+          color: $fontColor;
           padding-right: 48px;
         }
       }

@@ -5,13 +5,14 @@ import "./index.scss";
 import { ViewProps } from "@tarojs/components/types/View";
 
 interface itemType {
-  theme?: string;
+  theme: string;
   time: string;
   status: string;
   house: string;
   number: string;
   takePartInPerson: string;
   fromStatusText: string;
+  hidden?: false;
 }
 
 interface propsType {

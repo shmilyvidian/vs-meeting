@@ -17,15 +17,6 @@ const remindRanges = [
   "会前5分钟",
 ];
 
-// Taro.getStorage({
-//   key: 'key',
-//   success: function (res) {
-//     console.log(res.data)
-//   }
-// })
-// Taro.getStorageSync('key')
-// Taro.setStorageSync('key', 'value')
-
 function index() {
   let meetingMessageObjkeys = Object.keys(formFields);
   //按钮状态,0预约会议，1我预约的会议，2参与会议，3查看过去的会议
@@ -64,7 +55,7 @@ function index() {
         click: onShareMeeting,
       },
       {
-        value: "退出会议",
+        value: "取消会议",
         disabled: false,
         hidden: false,
         class: "default-btn",
@@ -79,18 +70,9 @@ function index() {
     let localData = Taro.getStorageSync("localData") || [];
     localData = localData ? localData : [];
     localData.push(meetingMessageObj);
-    // Taro.getStorageSync('key')
     Taro.setStorageSync("localData", localData);
-
-    console.log(Taro.getStorageSync("localData"));
-    // var pages = Taro.getCurrentPages();
     Taro.reLaunch({
       url: "/pages/index/index",
-    });
-  }
-  function onBackViewClick() {
-    Taro.navigateBack({
-      delta: 1,
     });
   }
 
@@ -103,6 +85,20 @@ function index() {
 
   // 设置meetingMessage
   const [meetingMessageObj, setMeetingMessageObj] = useState(formFields);
+  // 取消会议
+  function onBackViewClick() {
+    let isRemoves = Taro.getStorageSync("isRemove") || [];
+    isRemoves = isRemoves ? isRemoves : [];
+    const temporaryData3 = Taro.getStorageSync("temporaryData") || {};
+    const number = temporaryData3.number || "";
+    if (number && !isRemoves.includes(number + "")) {
+      isRemoves.push(number + "");
+    }
+    Taro.setStorageSync("isRemove", isRemoves);
+    Taro.navigateBack({
+      delta: 1,
+    });
+  }
 
   // 初始化路由参数
   const [param, setParam] = useState({});
@@ -199,7 +195,7 @@ function index() {
       default:
         setMeetingMessageObj(JSON.parse(JSON.stringify(formFields)));
     }
-    Taro.removeStorageSync("temporaryData");
+    // Taro.removeStorageSync("temporaryData");
   }
 
   useEffect(() => {
@@ -242,6 +238,16 @@ function index() {
     // wait: "未开始",meeting: "进行中",end: "已结束",
     switch (fromType) {
       case "wait":
+        if (fromStatus === "1") {
+          btnList["1"][1].value = "取消会议";
+          btnList["2"][1].value = "取消会议";
+        } else if (fromStatus === "2") {
+          btnList["1"][1].value = "退出会议";
+          btnList["2"][1].value = "退出会议";
+        } else {
+          btnList["1"][1].hidden = true;
+          btnList["2"][1].hidden = true;
+        }
         break;
       case "meeting":
         btnList["1"][1].hidden = true;
@@ -280,7 +286,8 @@ function index() {
     curPage.data.query = {
       takePartInPerson: meetingMessageObj.takePartInPerson.value,
     };
-    Taro.navigateTo(gennerateTaroNavigateParams(route, { introduce: value }));
+    const query: any = { introduce: value, disabled: fromStatus !== "0" };
+    Taro.navigateTo(gennerateTaroNavigateParams(route, query));
   }
 
   return (

@@ -3,16 +3,15 @@ import { Image, View } from "@tarojs/components";
 
 import "./index.scss";
 
-
 import room from "@/asstes/images/room.svg";
 import people from "@/asstes/images/people.svg";
 import vrImg from "@/asstes/images/vr.svg";
+import VR3x from "@/asstes/images/VR@3x.png";
+import pmt from "@/asstes/images/pmt@3x.png";
 
 function Index() {
-
   return (
     <View className="index-main">
-
       {/* 会议室信息 */}
       <View className="bg-fff">
         <View className="room-wrapper">
@@ -23,14 +22,12 @@ function Index() {
               <View className="room-length">
                 <Image src={people} className="people-icon"></Image>
                 可容纳20人
-                </View>
+              </View>
             </View>
             <View className="room-info-bottom">
               <View className="room-other">
                 <View className="room-feature">智能语音</View>
-                <View>
-                  投影/电视/电话/白板/视频
-                </View>
+                <View>投影/电视/电话/白板/视频</View>
               </View>
             </View>
           </View>
@@ -48,10 +45,12 @@ function Index() {
           <View className="conference-room-date">8月6号</View>
         </View>
         <View className="conference-room-vr">
-          VR画面
+          <Image className="conference-room-vr-img" src={VR3x}></Image>
         </View>
         <View className="conference-room-draw">
-          <View className="conference-room-plan">会议室平面图</View>
+          <View className="conference-room-plan">
+            <Image className="conference-room-plan-img" src={pmt}></Image>
+          </View>
           <View className="conference-room-legend">
             <View className="conference-room-legend-item">
               <View className="conference-room-legend-icon icon-blue"></View>
