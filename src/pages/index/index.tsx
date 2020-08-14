@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Taro from "@tarojs/taro";
+import React, { useState, useEffect } from "react";
+import Taro, { useDidShow } from "@tarojs/taro";
 import { Image, View, Button } from "@tarojs/components";
 import { gennerateTaroNavigateParams } from "@/utils/urlParam";
 import "./index.scss";
@@ -11,53 +11,41 @@ import more from "@/asstes/images/more.svg";
 
 function Index() {
   const [userName] = useState("张宏兵");
-  // 1.我预约的会议 2.参与会议 3.查看过去的会议
-  const [meetingList] = useState([
+  const localDataF: any = [];
+  const [localData, setLocalData] = useState(localDataF);
+  const meetingListF = [
     {
-      date: "8月14号",
-      time: "09:30-10:00",
+      theme: "同业PC",
+      time: "8月14号 09:30-10:00",
       fromStatus: "1",
       status: "meeting",
-      address: "荣超大厦1301",
-      mettingNumber: "82910321",
-      people: "8",
+      house: "荣超大厦1301",
+      number: "85510321",
+      takePartInPerson: "阿瑶，冯绍峰，高圆圆，胡歌",
       fromStatusText: "我预约的会议",
+      introduce: "同业PC需求澄清",
     },
     {
-      date: "8月15号",
-      time: "09:30-10:00",
+      theme: "经分财务",
+      time: "8月15号 09:30-10:00",
       fromStatus: "1",
       type: "1",
       status: "wait",
-      address: "荣超大厦1301",
-      mettingNumber: "82910321",
-      people: "6",
+      house: "荣超大厦1301",
+      number: "82950321",
+      takePartInPerson: "井柏然，金秀贤",
       fromStatusText: "参与的会议",
+      introduce: "经分财务需求澄清",
     },
-    {
-      date: "8月09号",
-      time: "09:30-10:00",
-      fromStatus: "2",
-      status: "end",
-      address: "荣超大厦1301",
-      mettingNumber: "82910321",
-      people: "10",
-      fromStatusText: "参与的会议",
-    },
-    {
-      date: "8月01号",
-      time: "09:30-10:00",
-      fromStatus: "3",
-      status: "end",
-      address: "荣超大厦1301",
-      mettingNumber: "82910321",
-      people: "10",
-      fromStatusText: "过去的会议",
-    },
-  ]);
+  ];
+  // 1.我预约的会议 2.参与会议 3.查看过去的会议
+  const [meetingList, setMeetingList] = useState(meetingListF);
 
   // 预约会议跳转
-  function goMeetingReserve(fromStatus, status) {
+  function goMeetingReserve(fromStatus, status, item) {
+    if (item) {
+      Taro.setStorageSync("temporaryData", item);
+    }
     Taro.navigateTo(
       gennerateTaroNavigateParams("meetingReserve", {
         fromStatus,
@@ -66,11 +54,41 @@ function Index() {
     );
   }
 
+  useDidShow(() => {
+    setLocalData(Taro.getStorageSync("localData") || []);
+  });
+
+  useEffect(() => {
+    if (localData && localData.length) {
+      const data: any = [];
+      localData.map((item) => {
+        const itemObj = {
+          theme: item.theme.value,
+          time: item.time.value,
+          house: item.house.value,
+          number: item.number.value,
+          takePartInPerson: item.takePartInPerson.value,
+          introduce: item.introduce.value,
+          status: "wait",
+          fromStatus: "1",
+          fromStatusText: "我预约的会议",
+        };
+        data.push(itemObj);
+      });
+      setMeetingList([...meetingListF, ...data]);
+    }
+  }, [localData]);
+
   // 渲染最近会议列表
   const meetingListView = meetingList.map((item, index) => {
     return (
       <LastestMeetingListItem
-        onClick={goMeetingReserve.bind(null, item.fromStatus, item.status)}
+        onClick={goMeetingReserve.bind(
+          null,
+          item.fromStatus,
+          item.status,
+          item
+        )}
         item={item}
         key={index}
       ></LastestMeetingListItem>

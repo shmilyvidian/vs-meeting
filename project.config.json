@@ -60,7 +60,7 @@
 					"id": 0,
 					"name": "会议预约",
 					"pathName": "pages/meetingReserve/index",
-					"query": "fromStatus=2",
+					"query": "fromStatus=2&fromType=end0",
 					"scene": null
 				},
 				{

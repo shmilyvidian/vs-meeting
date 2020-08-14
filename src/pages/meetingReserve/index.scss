@@ -67,7 +67,8 @@ page {
     &-text {
       width: 100%;
       height: 100%;
-      display: flex;
+      display: block;
+      text-align: right;
       justify-content: flex-end;
       align-items: center;
       text-align: right;
@@ -143,4 +144,20 @@ page {
   .icon-arrow-right {
     display: none;
   }
+}
+
+
+.overflow-height-0 {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.overflow-height-1 {
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+.overflow-height-2 {
+  height: calc(100vh - 300px);
+  overflow-y: auto;
 }

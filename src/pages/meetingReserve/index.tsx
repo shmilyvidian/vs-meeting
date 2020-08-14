@@ -17,6 +17,15 @@ const remindRanges = [
   "会前5分钟",
 ];
 
+// Taro.getStorage({
+//   key: 'key',
+//   success: function (res) {
+//     console.log(res.data)
+//   }
+// })
+// Taro.getStorageSync('key')
+// Taro.setStorageSync('key', 'value')
+
 function index() {
   let meetingMessageObjkeys = Object.keys(formFields);
   //按钮状态,0预约会议，1我预约的会议，2参与会议，3查看过去的会议
@@ -67,6 +76,13 @@ function index() {
 
   // 完成默认event
   function onDefaultClick() {
+    let localData = Taro.getStorageSync("localData") || [];
+    localData = localData ? localData : [];
+    localData.push(meetingMessageObj);
+    // Taro.getStorageSync('key')
+    Taro.setStorageSync("localData", localData);
+
+    console.log(Taro.getStorageSync("localData"));
     // var pages = Taro.getCurrentPages();
     Taro.reLaunch({
       url: "/pages/index/index",
@@ -83,11 +99,6 @@ function index() {
     console.log("分享会议......");
   }
 
-  // 再次预约
-  function onAgainReserve() {
-    setFromStatus("0");
-  }
-
   const [btns, setBtn] = useState(btnList["0"]);
 
   // 设置meetingMessage
@@ -97,12 +108,19 @@ function index() {
   const [param, setParam] = useState({});
 
   // 设置picker默认选中
-  const [remindRangeed, setremindRangeed] = useState(remindRanges[1]);
+  const [remindRangeed, setremindRangeed] = useState(remindRanges[4]);
 
   // 设置初始状态
   const [fromStatus, setFromStatus] = useState("");
 
   const [fromType, setFromType] = useState("");
+
+  const classNames = {
+    0: "overflow-height-0",
+    1: "overflow-height-1",
+    2: "overflow-height-2",
+  };
+  const [overflowClass, setOverflowClass] = useState("");
 
   // 从其他页面跳回来带参数的话，得渲染
   useDidShow(() => {
@@ -125,26 +143,63 @@ function index() {
         });
         break;
       case "1":
-        setMeetingMessageObj(JSON.parse(JSON.stringify(fillFormFields)));
+        const temporaryData1 = Taro.getStorageSync("temporaryData");
+        const lFillFormFields1 = JSON.parse(JSON.stringify(fillFormFields));
+        if (temporaryData1) {
+          const paramKeys = Object.keys(temporaryData1);
+          if (paramKeys.length) {
+            paramKeys.forEach((pKey) => {
+              if (meetingMessageObjkeys.includes(pKey)) {
+                lFillFormFields1[pKey].value = temporaryData1[pKey];
+              }
+            });
+          }
+        }
+        setMeetingMessageObj(lFillFormFields1);
         Taro.setNavigationBarTitle({
           title: "我预约的会议",
         });
         break;
       case "2":
-        setMeetingMessageObj(JSON.parse(JSON.stringify(fillFormFields)));
+        const temporaryData2 = Taro.getStorageSync("temporaryData");
+        const lFillFormFields2 = JSON.parse(JSON.stringify(fillFormFields));
+        if (temporaryData2) {
+          const paramKeys = Object.keys(temporaryData2);
+          if (paramKeys.length) {
+            paramKeys.forEach((pKey) => {
+              if (meetingMessageObjkeys.includes(pKey)) {
+                lFillFormFields2[pKey].value = temporaryData2[pKey];
+              }
+            });
+          }
+        }
+        setMeetingMessageObj(lFillFormFields2);
         Taro.setNavigationBarTitle({
-          title: "参与会议",
+          title: "我参与的会议",
         });
         break;
       case "3":
-        setMeetingMessageObj(JSON.parse(JSON.stringify(fillFormFields)));
+        const temporaryData3 = Taro.getStorageSync("temporaryData");
+        const lFillFormFields = JSON.parse(JSON.stringify(fillFormFields));
+        if (temporaryData3) {
+          const paramKeys = Object.keys(temporaryData3);
+          if (paramKeys.length) {
+            paramKeys.forEach((pKey) => {
+              if (meetingMessageObjkeys.includes(pKey)) {
+                lFillFormFields[pKey].value = temporaryData3[pKey];
+              }
+            });
+          }
+        }
+        setMeetingMessageObj(lFillFormFields);
         Taro.setNavigationBarTitle({
-          title: "查看过去的会议",
+          title: "过去的会议",
         });
         break;
       default:
         setMeetingMessageObj(JSON.parse(JSON.stringify(formFields)));
     }
+    Taro.removeStorageSync("temporaryData");
   }
 
   useEffect(() => {
@@ -189,13 +244,21 @@ function index() {
       case "wait":
         break;
       case "meeting":
+        btnList["1"][1].hidden = true;
+        btnList["2"][1].hidden = true;
         break;
       case "end":
         btnList["1"][1].hidden = true;
         btnList["2"][1].hidden = true;
         break;
     }
-
+    let count = 0;
+    btnList[fromStatus].forEach((item) => {
+      if (!item.hidden) {
+        count += 1;
+      }
+    });
+    setOverflowClass(classNames[count]);
     setBtn(btnList[fromStatus]);
   }, [fromStatus, fromType]);
 
@@ -217,82 +280,84 @@ function index() {
 
   return (
     <View>
-      {Object.keys(formFields).map((key) => {
-        const item = meetingMessageObj[key];
-        switch (item.showType) {
-          case "input":
-            return (
-              !item.hidden && (
-                <AtInput
-                  className={[item.class, "meeting-input"]}
-                  key={key}
-                  name={key}
-                  title={item.label}
-                  value={item.value}
-                  disabled={item.disabled}
-                  onChange={iptChange.bind(this, key)}
-                  placeholder={`请输入${item.label}`}
-                ></AtInput>
-              )
-            );
-          case "route":
-            return (
-              !item.hidden && (
-                <AtInput
-                  className={[item.class, "meeting-input", "route-input"]}
-                  key={key}
-                  name={key}
-                  disabled={item.disabled}
-                  title={item.label}
-                  value={item.value}
-                  placeholder="请选择"
-                >
-                  <View
-                    className="go-next-route"
-                    onClick={routeClick.bind(this, item.route, item.value)}
+      <View className={overflowClass}>
+        {Object.keys(formFields).map((key) => {
+          const item = meetingMessageObj[key];
+          switch (item.showType) {
+            case "input":
+              return (
+                !item.hidden && (
+                  <AtInput
+                    className={[item.class, "meeting-input"]}
+                    key={key}
+                    name={key}
+                    title={item.label}
+                    value={item.value}
+                    disabled={item.disabled}
+                    onChange={iptChange.bind(this, key)}
+                    placeholder={`请输入${item.label}`}
+                  ></AtInput>
+                )
+              );
+            case "route":
+              return (
+                !item.hidden && (
+                  <AtInput
+                    className={[item.class, "meeting-input", "route-input"]}
+                    key={key}
+                    name={key}
+                    disabled={item.disabled}
+                    title={item.label}
+                    value={item.value}
+                    placeholder="请选择"
                   >
-                    {item.value ? (
-                      <View className="go-next-route-text">{item.value}</View>
-                    ) : (
-                      <View className="go-next-route-text">请选择</View>
-                    )}
+                    <View
+                      className="go-next-route"
+                      onClick={routeClick.bind(this, item.route, item.value)}
+                    >
+                      {item.value ? (
+                        <View className="go-next-route-text">{item.value}</View>
+                      ) : (
+                        <View className="go-next-route-text">请选择</View>
+                      )}
 
+                      <Image className="icon-arrow-right" src={arrow}></Image>
+                    </View>
+                  </AtInput>
+                )
+              );
+
+            case "picker":
+              return (
+                !item.hidden && (
+                  <Picker
+                    disabled={item.disabled}
+                    className={[
+                      "remind-picker",
+                      item.disabled ? "remind-picker-disabled" : "",
+                    ]}
+                    key="remindRangeed"
+                    mode="selector"
+                    range={remindRanges}
+                    value="4"
+                    onChange={remindChange.bind(this)}
+                  >
+                    <AtList>
+                      <AtListItem
+                        title={item.label}
+                        value="1"
+                        extraText={remindRangeed}
+                      />
+                    </AtList>
                     <Image className="icon-arrow-right" src={arrow}></Image>
-                  </View>
-                </AtInput>
-              )
-            );
-
-          case "picker":
-            return (
-              !item.hidden && (
-                <Picker
-                  disabled={item.disabled}
-                  className={[
-                    "remind-picker",
-                    item.disabled ? "remind-picker-disabled" : "",
-                  ]}
-                  key="remindRangeed"
-                  mode="selector"
-                  range={remindRanges}
-                  value="1"
-                  onChange={remindChange.bind(this)}
-                >
-                  <AtList>
-                    <AtListItem
-                      title={item.label}
-                      value="1"
-                      extraText={remindRangeed}
-                    />
-                  </AtList>
-                  <Image className="icon-arrow-right" src={arrow}></Image>
-                </Picker>
-              )
-            );
-          default:
-            return null;
-        }
-      })}
+                  </Picker>
+                )
+              );
+            default:
+              return null;
+          }
+        })}
+      </View>
       <BtnViews btnList={btns}></BtnViews>
     </View>
   );

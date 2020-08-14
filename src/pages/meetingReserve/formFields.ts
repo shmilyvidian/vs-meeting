@@ -139,7 +139,7 @@ export const formFields = {
   number: {
     key: "number",
     label: "会议号",
-    value: "21788332",
+    value: Math.floor(Math.random() * (99999999 - 1 + 1) + 1),
     disabled: true,
     hidden: true,
     showType: "input",

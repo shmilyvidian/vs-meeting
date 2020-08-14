@@ -28,56 +28,70 @@ function Index() {
       index: "3",
     },
   ]);
-
+  const tabDataObj = {
+    1: [],
+    2: [
+      {
+        theme: "同业PC",
+        time: "8月14号 09:30-10:00",
+        fromStatus: "1",
+        status: "meeting",
+        house: "荣超大厦1301",
+        number: "85510321",
+        takePartInPerson: "阿瑶，冯绍峰，高圆圆，胡歌",
+        fromStatusText: "我预约的会议",
+        introduce: "同业PC需求澄清",
+      },
+    ],
+    3: [
+      {
+        theme: "经分财务",
+        time: "8月15号 09:30-10:00",
+        fromStatus: "2",
+        type: "1",
+        status: "wait",
+        house: "荣超大厦1301",
+        number: "82950321",
+        takePartInPerson: "井柏然，金秀贤",
+        fromStatusText: "参与的会议",
+        introduce: "经分财务需求澄清",
+      },
+      {
+        theme: "经分同业",
+        time: "8月09号 09:30-10:00",
+        fromStatus: "3",
+        status: "end",
+        house: "荣超大厦1301",
+        number: "82911521",
+        takePartInPerson: "孔连顺，欧阳娜娜",
+        fromStatusText: "参与的会议",
+        introduce: "经分同业需求澄清",
+      },
+      {
+        theme: "经分风险",
+        time: "8月01号 09:30-10:00",
+        fromStatus: "3",
+        status: "end",
+        house: "荣超大厦1301",
+        number: "82910321",
+        takePartInPerson: "宋仲基，王俊凯，欧阳娜娜",
+        fromStatusText: "参与的会议",
+        introduce: "经分风险需求澄清",
+      },
+    ],
+  };
   const [meetingList, setMeetingList] = useState([
-    {
-      date: "8月9号",
-      time: "09:30-10:00",
-      fromStatus: "2",
-      status: "meeting",
-      address: "荣超大厦1301",
-      mettingNumber: "82910321",
-      people: "8",
-      fromStatusText: "参与的会议",
-    },
-    {
-      date: "8月10号",
-      time: "09:30-10:00",
-      fromStatus: "1",
-      type: "1",
-      status: "wait",
-      address: "荣超大厦1301",
-      mettingNumber: "82910321",
-      people: "6",
-      fromStatusText: "我预约的会议",
-    },
-    {
-      date: "8月09号",
-      time: "09:30-10:00",
-      fromStatus: "2",
-      status: "end",
-      address: "荣超大厦1301",
-      mettingNumber: "82910321",
-      people: "10",
-      fromStatusText: "参与的会议",
-    },
-    {
-      date: "8月11号",
-      time: "09:30-10:00",
-      fromStatus: "1",
-      type: "1",
-      status: "end",
-      address: "荣超大厦1301",
-      mettingNumber: "82910321",
-      people: "10",
-      fromStatusText: "我预约的会议",
-    },
+    ...tabDataObj["2"],
+    ...tabDataObj["3"],
   ]);
 
   const [meetingListCopy, setMeetingListCopy] = useState(meetingList);
 
   // 1.我预约的会议 2.参与会议 3.查看过去的会议
-  function goMeetingReserve(status, fromStatus) {
+  function goMeetingReserve(status, fromStatus, item) {
+    if (item) {
+      Taro.setStorageSync("temporaryData", item);
+    }
     Taro.navigateTo(
       gennerateTaroNavigateParams("meetingReserve", {
         fromStatus,
@@ -89,25 +103,23 @@ function Index() {
   // 切换预约列表
   function onChangeTabs(status) {
     setTabsType((tabsType = status));
-    setMeetingList(
-      meetingListCopy.filter((_item, i) => {
-        switch (status) {
-          case "2":
-            return i % 2;
-          case "3":
-            return !(i % 2);
-          default:
-            return true;
-        }
-      })
-    );
+    if (status === "1") {
+      setMeetingList([...tabDataObj["2"], ...tabDataObj["3"]]);
+    } else {
+      setMeetingList(tabDataObj[status]);
+    }
   }
 
   // 渲染最近会议列表
   const meetingListView = meetingList.map((item, index) => {
     return (
       <LastestMeetingListItem
-        onClick={goMeetingReserve.bind(null, item.status, item.fromStatus)}
+        onClick={goMeetingReserve.bind(
+          null,
+          item.status,
+          item.fromStatus,
+          item
+        )}
         item={item}
         key={index}
       ></LastestMeetingListItem>

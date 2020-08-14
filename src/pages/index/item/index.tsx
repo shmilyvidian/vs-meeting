@@ -5,12 +5,12 @@ import "./index.scss";
 import { ViewProps } from "@tarojs/components/types/View";
 
 interface itemType {
-  date: string;
+  theme?: string;
   time: string;
   status: string;
-  address: string;
-  mettingNumber: string;
-  people: string;
+  house: string;
+  number: string;
+  takePartInPerson: string;
   fromStatusText: string;
 }
 
@@ -41,23 +41,25 @@ function LastestMeetingListItem(props: propsType) {
   return (
     <View className="histroy-list" onClick={onClick}>
       <View className="histroy-list-item">
-        <View className="histroy-list-common">{item.date}</View>
+        <View className="histroy-list-common">{item.time.split(" ")[0]}</View>
         {handleStatus(item.status)}
       </View>
       <View className="histroy-list-item">
-        <View className="histroy-list-common">{item.time}</View>
-        <View className="histroy-list-common">{item.address}</View>
+        <View className="histroy-list-common">{item.time.split(" ")[1]}</View>
+        <View className="histroy-list-common">{item.house}</View>
       </View>
       <View className="histroy-list-item">
         <View className="histroy-list-common-second">
           {item.fromStatusText}
         </View>
         <View className="histroy-list-common-second">
-          会议号：{item.mettingNumber}
+          会议号：{item.number}
         </View>
       </View>
       <View className="histroy-list-item histroy-list-item-second">
-        <View className="histroy-list-common-second">共{item.people}人</View>
+        <View className="histroy-list-common-second">
+          共{item.takePartInPerson.split("，").length}人
+        </View>
       </View>
     </View>
   );
