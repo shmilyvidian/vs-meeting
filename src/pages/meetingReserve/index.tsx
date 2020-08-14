@@ -275,6 +275,11 @@ function index() {
 
   // 页面跳转
   function routeClick(route, value) {
+    var pages = Taro.getCurrentPages();
+    var curPage = pages[pages.length - 1]; //当前页面
+    curPage.data.query = {
+      takePartInPerson: meetingMessageObj.takePartInPerson.value,
+    };
     Taro.navigateTo(gennerateTaroNavigateParams(route, { introduce: value }));
   }
 

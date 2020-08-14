@@ -12,7 +12,7 @@ const Index = () => {
   const [name, setName] = useState<string>(""); // 搜索值
   const arrPlaceholder: any = "";
   const [checkedList, setCheckedList] = useState(arrPlaceholder); // 选中的key
-  const [checkedAllList, setCheckedAllListx] = useState([]); // 全选的key
+  const [checkedAllList, setCheckedAllListx] = useState(['']); // 全选的key
   const [listScrollHeight, setListScrollHeight] = useState<string>("0px"); // 联系人列表的高度
   const [tolistScrollView, setTolistScrollView] = useState(""); // 点击右侧索引列表要跳至的key
 
@@ -245,18 +245,9 @@ const Index = () => {
   ];
 
   const [searchList, setSearchList] = useState(list);
-  let allSelectListValue: Array<string> = []; // 存储所有的联系人的选中值value
+  const [allSelectListValue, setAllSelectListValue] = useState<any>([]); // 存储所有的联系人的选中值value
   let allListKey: Array<string> = []; // 存储所有的联系人所在的key分类
-  let allValueInItem = {}; // 存储所有的选中联系人value所在的item
-  list.map((allItem) => {
-    allListKey.push(allItem.key);
-    if (allItem.items.length) {
-      allItem.items.forEach((v) => {
-        allSelectListValue.push(v.value);
-        allValueInItem[v.value] = v
-      });
-    }
-  });
+  const [allValueInItem, setAllValueInItem] = useState({}); // 存储所有的选中联系人value所在的item
   const allSelectList = [
     {
       title: "ALL",
@@ -302,8 +293,31 @@ const Index = () => {
   useDidShow(() => {
     const pages = Taro.getCurrentPages();
     const prevPage = pages[pages.length - 2]; //上一个页面
-    console.log('pages, prevPage == ', pages, prevPage)
-    
+    const prevPageName = prevPage.data.query ? (prevPage.data.query.takePartInPerson || '') : ''
+    const prevPageNameArr = prevPageName.split('，')
+    let getCheckedList:Array<string> = []
+    const allValueInItemObj = {}
+    const allSelectListValueObj:Array<string> = []
+    let checkLen = 0
+    list.map((allItem) => {
+      allListKey.push(allItem.key);
+      if (allItem.items.length) {
+        allItem.items.forEach((v) => {
+          allSelectListValueObj.push(v.value);
+          allValueInItemObj[v.value] = v
+          if(prevPageNameArr.indexOf(v.label) > -1){
+            getCheckedList.push(v.value)
+            checkLen = checkLen+=1
+          }
+        });
+      }
+    });
+    setAllValueInItem(allValueInItemObj) // 存储所有的选中联系人value所在的item
+    setAllSelectListValue(allSelectListValueObj) // 存储所有的联系人的选中值value
+    setCheckedList(getCheckedList) // 设置联系人列表选中
+    if(allSelectListValueObj.length === checkLen){ // 设置联系人是否全选
+      setCheckedAllListx(['all']);
+    }
   })
 
   // 联系人全选
