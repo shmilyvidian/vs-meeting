@@ -1,4 +1,4 @@
-import { View, ScrollView, Image } from "@tarojs/components";
+import { View, ScrollView } from "@tarojs/components";
 // import { AtIndexes } from 'taro-ui'
 import React, { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
@@ -7,8 +7,6 @@ import { AtInput, AtCheckbox, AtButton } from "taro-ui";
 
 import LetterList from "./letterList/index";
 import "./index.scss";
-import { NameItemImg } from './indexSty'
-import manHeadPortrait from "@/asstes/images/headPortrait/man.svg";
 
 const Index = () => {
   const [name, setName] = useState<string>(""); // 搜索值
@@ -24,17 +22,15 @@ const Index = () => {
       key: "A",
       items: [
         {
-          name: "阿坝",
+          name: "阿丹",
           value: "alist1",
-          label: "阿坝1",
-          key: "akey1",
+          label: "阿丹",
           // 此处可加其他业务字段
         },
         {
-          name: "阿拉善",
+          name: "阿瑶",
           value: "alis2",
-          label: "阿坝2",
-          key: "akey2",
+          label: "阿瑶",
         },
       ],
     },
@@ -43,16 +39,14 @@ const Index = () => {
       key: "B",
       items: [
         {
-          name: "北京",
+          name: "白百合",
           value: "blist1",
-          label: "b阿坝1",
-          key: "bkey1",
+          label: "白百合",
         },
         {
-          name: "保定",
+          name: "白举纲",
           value: "blist2",
-          label: "b阿坝2",
-          key: "bkey2",
+          label: "白举纲",
         },
       ],
     },
@@ -61,16 +55,14 @@ const Index = () => {
       key: "D",
       items: [
         {
-          name: "北京",
+          name: "迪丽热巴",
           value: "dlist1",
-          label: "d阿坝1",
-          key: "bkey1",
+          label: "迪丽热巴",
         },
         {
-          name: "保定",
+          name: "邓紫棋",
           value: "dlist2",
-          label: "d阿坝2",
-          key: "bkey2",
+          label: "邓紫棋",
         },
       ],
     },
@@ -79,16 +71,14 @@ const Index = () => {
       key: "E",
       items: [
         {
-          name: "北京",
+          name: "Eason ",
           value: "elist1",
-          label: "e阿坝1",
-          key: "bkey1",
+          label: "Eason ",
         },
         {
-          name: "保定",
+          name: "EXO",
           value: "elist2",
-          label: "e阿坝2",
-          key: "bkey2",
+          label: "EXO",
         },
       ],
     },
@@ -97,16 +87,14 @@ const Index = () => {
       key: "F",
       items: [
         {
-          name: "北京",
+          name: "范冰冰",
           value: "flist1",
-          label: "f阿坝1",
-          key: "bkey1",
+          label: "范冰冰",
         },
         {
-          name: "保定",
+          name: "冯绍峰",
           value: "flist2",
-          label: "f阿坝2",
-          key: "bkey2",
+          label: "冯绍峰",
         },
       ],
     },
@@ -115,16 +103,142 @@ const Index = () => {
       key: "G",
       items: [
         {
-          name: "北京",
+          name: "高圆圆",
           value: "glist1",
-          label: "g阿坝1",
-          key: "bkey1",
+          label: "高圆圆",
         },
         {
-          name: "保定",
+          name: "郭德纲",
           value: "glist2",
-          label: "g阿坝2",
-          key: "bkey2",
+          label: "郭德纲",
+        },
+      ],
+    },
+    {
+      title: "H",
+      key: "H",
+      items: [
+        {
+          name: "黄晓明",
+          value: "hlist1",
+          label: "黄晓明",
+        },
+        {
+          name: "胡歌",
+          value: "hlist2",
+          label: "胡歌",
+        },
+      ],
+    },
+    {
+      title: "J",
+      key: "J",
+      items: [
+        {
+          name: "井柏然",
+          value: "jlist1",
+          label: "井柏然",
+        },
+        {
+          name: "金秀贤",
+          value: "jlist2",
+          label: "金秀贤",
+        },
+      ],
+    },
+    {
+      title: "K",
+      key: "K",
+      items: [
+        {
+          name: "孔连顺",
+          value: "klist1",
+          label: "孔连顺",
+        },
+        {
+          name: "昆凌",
+          value: "klist2",
+          label: "昆凌",
+        },
+      ],
+    },
+    {
+      title: "N",
+      key: "N",
+      items: [
+        {
+          name: "那英",
+          value: "nlist1",
+          label: "那英",
+        },
+        {
+          name: "宁静",
+          value: "nlist2",
+          label: "宁静",
+        },
+      ],
+    },
+    {
+      title: "O",
+      key: "O",
+      items: [
+        {
+          name: "欧豪",
+          value: "olist1",
+          label: "欧豪",
+        },
+        {
+          name: "欧阳娜娜",
+          value: "olist2",
+          label: "欧阳娜娜",
+        },
+      ],
+    },
+    {
+      title: "S",
+      key: "S",
+      items: [
+        {
+          name: "宋仲基",
+          value: "slist1",
+          label: "宋仲基",
+        },
+        {
+          name: "孙俪",
+          value: "slist2",
+          label: "孙俪",
+        },
+      ],
+    },
+    {
+      title: "W",
+      key: "W",
+      items: [
+        {
+          name: "吴亦凡",
+          value: "wlist1",
+          label: "吴亦凡",
+        },
+        {
+          name: "王俊凯",
+          value: "wlist2",
+          label: "王俊凯",
+        },
+      ],
+    },
+    {
+      title: "Y",
+      key: "Y",
+      items: [
+        {
+          name: "杨超越",
+          value: "ylist1",
+          label: "杨超越",
+        },
+        {
+          name: "杨洋",
+          value: "ylist2",
+          label: "杨洋",
         },
       ],
     },
@@ -133,10 +247,10 @@ const Index = () => {
   const [searchList, setSearchList] = useState(list);
   let allSelectListValue: Array<string> = []; // 存储所有的联系人的选中值value
   let allListKey: Array<string> = []; // 存储所有的联系人所在的key分类
-  list.map((allItem, allIndex) => {
+  list.map((allItem) => {
     allListKey.push(allItem.key);
     if (allItem.items.length) {
-      allItem.items.map((v, i) => {
+      allItem.items.forEach((v) => {
         allSelectListValue.push(v.value);
       });
     }
@@ -155,21 +269,11 @@ const Index = () => {
       ],
     },
   ];
-  function personImgList(_item) {
-    return _item.items.map((imgt, imgId) => {
-      return (
-        <NameItemImg className="contact-item-name-img" src={manHeadPortrait} ind={imgId}></NameItemImg>
-      )
-    })
-  } 
   const listContact = searchList.map((_item, i) => {
     return (
       <View className="contact-item-name" key={i}>
         <View key={i + "title"} className="contact-item-title" id={_item.key}>
           {_item.key}
-        </View>
-        <View className="contact-name-img">
-          {personImgList(_item)}
         </View>
         <AtCheckbox
           options={_item.items}
@@ -272,6 +376,7 @@ const Index = () => {
       {/* 联系人滚动列表 */}
       <View className="contact-list-name" id="contactScrollView">
         <ScrollView
+          className="contact-list-name-scroll_view"
           scrollY
           scrollIntoView={tolistScrollView}
           style={{ height: listScrollHeight }}

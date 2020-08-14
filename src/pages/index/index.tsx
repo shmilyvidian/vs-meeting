@@ -57,7 +57,7 @@ function Index() {
   ]);
 
   // 预约会议跳转
-  function goMeetingReserve(status, fromStatus) {
+  function goMeetingReserve(fromStatus, status) {
     Taro.navigateTo(
       gennerateTaroNavigateParams("meetingReserve", {
         fromStatus,
@@ -70,7 +70,7 @@ function Index() {
   const meetingListView = meetingList.map((item, index) => {
     return (
       <LastestMeetingListItem
-        onClick={goMeetingReserve.bind(null, item.status, item.fromStatus)}
+        onClick={goMeetingReserve.bind(null, item.fromStatus, item.status)}
         item={item}
         key={index}
       ></LastestMeetingListItem>

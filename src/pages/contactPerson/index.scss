@@ -5,6 +5,7 @@
 @import "~taro-ui/dist/style/components/checkbox.scss";
 @import "~taro-ui/dist/style/components/icon.scss";
 
+
 .contact-page {
   display: flex;
   flex-direction: column;
@@ -15,23 +16,23 @@
     flex: none;
     background: #fff;
     padding: 0 32px;
-  
+
     .at-input {
       margin: 0;
-  
+
       input {
         padding-left: 44px;
         border-radius: 22.4px;
         background: #F7F7F7;
-    
+
         .placeholder-class {
           font-size: 28px;
           color: #909399;
-        }    
+        }
       }
     }
   }
-  
+
   .contact-all-name {
     flex: none;
     display: flex;
@@ -58,13 +59,15 @@
     overflow: hidden;
     padding: 0 32px;
 
-    .contact-name-img {
-      position: relative;
+    &-scroll_view {
+      & ::-webkit-scrollbar {
 
-      .contact-item-name-img {
-        position: absolute;
-        width: 64px;
-        height: 64px;
+        width: 0;
+
+        height: 0;
+
+        color: transparent;
+
       }
     }
 
@@ -75,16 +78,12 @@
         font-size: 32px;
         color: #909399;
       }
-      
+
       .at-checkbox {
         background: transparent;
 
         .at-checkbox__option {
           padding-left: 0;
-
-          .at-checkbox__title {
-            padding-left: 88px;
-          }
         }
       }
     }
