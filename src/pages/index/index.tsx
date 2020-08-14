@@ -11,28 +11,58 @@ import more from "@/asstes/images/more.svg";
 
 function Index() {
   const [userName] = useState("张宏兵");
-
+  // 1.我预约的会议 2.参与会议 3.查看过去的会议
   const [meetingList] = useState([
     {
-      title: "同业需求评审",
-      date: "09:30-10:00",
-      fromStatus: "2",
-      user: "Rain",
+      date: "8月14号",
+      time: "09:30-10:00",
+      fromStatus: "1",
       status: "meeting",
+      address: "荣超大厦1301",
+      mettingNumber: "82910321",
+      people: "8",
+      fromStatusText: "我预约的会议",
     },
     {
-      title: "经分需求评审",
-      date: "09:30-10:00",
-      fromStatus: "2",
-      user: "艾杰",
+      date: "8月15号",
+      time: "09:30-10:00",
+      fromStatus: "1",
+      type: "1",
       status: "wait",
+      address: "荣超大厦1301",
+      mettingNumber: "82910321",
+      people: "6",
+      fromStatusText: "参与的会议",
+    },
+    {
+      date: "8月09号",
+      time: "09:30-10:00",
+      fromStatus: "2",
+      status: "end",
+      address: "荣超大厦1301",
+      mettingNumber: "82910321",
+      people: "10",
+      fromStatusText: "参与的会议",
+    },
+    {
+      date: "8月01号",
+      time: "09:30-10:00",
+      fromStatus: "3",
+      status: "end",
+      address: "荣超大厦1301",
+      mettingNumber: "82910321",
+      people: "10",
+      fromStatusText: "过去的会议",
     },
   ]);
 
   // 预约会议跳转
-  function goMeetingReserve(fromStatus) {
+  function goMeetingReserve(status, fromStatus) {
     Taro.navigateTo(
-      gennerateTaroNavigateParams("meetingReserve", { fromStatus })
+      gennerateTaroNavigateParams("meetingReserve", {
+        fromStatus,
+        fromType: status,
+      })
     );
   }
 
@@ -40,7 +70,7 @@ function Index() {
   const meetingListView = meetingList.map((item, index) => {
     return (
       <LastestMeetingListItem
-        onClick={goMeetingReserve.bind(null, item.fromStatus)}
+        onClick={goMeetingReserve.bind(null, item.status, item.fromStatus)}
         item={item}
         key={index}
       ></LastestMeetingListItem>

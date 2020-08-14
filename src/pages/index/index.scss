@@ -36,6 +36,10 @@
   align-items: center;
   padding-top: 80px;
   padding-left: 32px;
+
+  .user-name {
+    font-weight: 700;
+  }
 }
 
 .user-img {
@@ -47,12 +51,16 @@
 .lastest-meeting {
   margin-top: 16px;
   box-sizing: border-box;
-  padding: 32px 32px 0 32px;
 
   &-flex {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 36px;
+    margin-top: 16px;
+    padding: 16px 32px;
+
+    .lastest-meeting-title {
+      font-size: 32px;
+    }
   }
 
   &-title {
@@ -73,5 +81,11 @@
     width: 16px;
     height: 20px;
     margin-left: 8px;
+  }
+
+
+  &-list {
+    height: calc(100vh - 496px);
+    overflow-y: auto;
   }
 }

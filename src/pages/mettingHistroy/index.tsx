@@ -38,6 +38,7 @@ function Index() {
       address: "荣超大厦1301",
       mettingNumber: "82910321",
       people: "8",
+      fromStatusText: "参与的会议",
     },
     {
       date: "8月10号",
@@ -48,6 +49,7 @@ function Index() {
       address: "荣超大厦1301",
       mettingNumber: "82910321",
       people: "6",
+      fromStatusText: "我预约的会议",
     },
     {
       date: "8月09号",
@@ -57,6 +59,7 @@ function Index() {
       address: "荣超大厦1301",
       mettingNumber: "82910321",
       people: "10",
+      fromStatusText: "参与的会议",
     },
     {
       date: "8月11号",
@@ -67,6 +70,7 @@ function Index() {
       address: "荣超大厦1301",
       mettingNumber: "82910321",
       people: "10",
+      fromStatusText: "我预约的会议",
     },
   ]);
 

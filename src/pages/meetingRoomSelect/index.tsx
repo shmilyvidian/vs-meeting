@@ -1,9 +1,10 @@
-import { View, Picker } from "@tarojs/components";
+import { View, Picker, Image } from "@tarojs/components";
 // import { AtIndexes } from 'taro-ui'
 import React, { useState, useEffect } from "react";
 
 import RoomItem from "./roomItem/index";
 import "./index.scss";
+import arrowRight from "@/asstes/images/arrow_right.svg";
 import { RoomValBtn } from "./indexSty";
 
 const Index = () => {
@@ -54,7 +55,7 @@ const Index = () => {
     ["2楼", "3楼", "4楼"],
   ];
 
-  const roomList = [
+  const list = [
     {
       sum: "20",
       numb: "308",
@@ -96,7 +97,85 @@ const Index = () => {
     },
     {
       sum: "20",
-      numb: "406",
+      numb: "404",
+      features: "智能语音",
+      functionDetails: "投影/电视/电话/白板/视频",
+      statusOfUseArr: [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "4",
+        "4",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "2",
+      ], // 1选中-蓝 2已预约-橙 3可预约-绿 4不可预约-灰
+    },
+    {
+      sum: "20",
+      numb: "402",
+      features: "智能语音",
+      functionDetails: "投影/电视/电话/白板/视频",
+      statusOfUseArr: [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "2",
+      ], // 1选中-蓝 2已预约-橙 3可预约-绿 4不可预约-灰
+    },
+    {
+      sum: "20",
+      numb: "408",
       features: "智能语音",
       functionDetails: "投影/电视/电话/白板/视频",
       statusOfUseArr: [
@@ -116,14 +195,14 @@ const Index = () => {
         "4",
         "4",
         "4",
+        "3",
+        "3",
         "2",
         "2",
-        "1",
-        "1",
         "2",
         "2",
-        "1",
-        "1",
+        "3",
+        "3",
         "1",
         "1",
         "2",
@@ -134,6 +213,8 @@ const Index = () => {
       ], // 1选中-蓝 2已预约-橙 3可预约-绿 4不可预约-灰
     },
   ];
+  const [roomList, setRoomList] = useState(list);
+  const [roomListCopy] = useState(roomList);
 
   useEffect(() => {}, [weekListValue]);
 
@@ -149,6 +230,26 @@ const Index = () => {
   function roomValBtnClick(item) {
     if (!item.disable) {
       setweekListValue(item.value);
+      setRoomList(
+        roomListCopy.filter((_item, i) => {
+          switch (item.value) {
+            case "2":
+              return i === 0 || i === 2;
+            case "3":
+              return i === 1 || i === 3;
+            case "4":
+              return true;
+            case "5":
+              return i === 0 || i === 3;
+            case "6":
+              return i === 1 || i === 2;
+            case "7":
+              return i === 3;
+            default:
+              return true;
+          }
+        })
+      );
     }
   }
 
@@ -202,7 +303,11 @@ const Index = () => {
             <View className="meeting-room-select-title-l">会议室</View>
             <View className="meeting-room-select-title-r">
               {roomSelectArrValue}
-              <View className="at-icon at-icon-chevron-right"></View>
+              {/* <View className='at-icon at-icon-chevron-right'></View> */}
+              <Image
+                className="meeting-room-select-title-icon"
+                src={arrowRight}
+              ></Image>
             </View>
           </View>
         </Picker>

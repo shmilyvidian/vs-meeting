@@ -1,7 +1,58 @@
-.metting-list {
-  &-item {
-    margin-bottom: 44px;
+$fontColor: #303133;
+$fontSize: 32px;
+
+.histroy-list {
+  padding: 16px 32px;
+  border-bottom: 10px solid #f6f6f6;
+
+  &:nth-last-child(1) {
+    border-bottom-width: 0;
   }
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  &-common {
+    color: $fontColor;
+    font-size: $fontSize;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+  }
+
+  .meeting {
+    width: 96px;
+    color: #3476FE;
+    font-size: 24px;
+    background-color: rgba(52, 118, 254, 0.12);
+  }
+
+  .wait {
+    color: #F9BB4C;
+    width: 96px;
+    font-size: 24px;
+    background-color: rgba(249, 187, 76, 0.12);
+  }
+
+  .end {
+    color: #C0C4CC;
+    width: 96px;
+    font-size: 24px;
+    background-color: rgba(192, 196, 204, 0.12);
+  }
+
+  &-common-second {
+    color: #909399;
+    font-size: 28px;
+  }
+
+  &-item-second {
+    flex-direction: row-reverse;
+  }
+
 }
 
 .metting-item-top {
@@ -10,10 +61,9 @@
   overflow: hidden;
 
   &-title {
-    color: #303133;
+    color: $fontColor;
     display: flex;
     align-items: center;
-    font-size: 32px;
   }
 
   &-date {
@@ -28,7 +78,7 @@
   color: #909399;
 }
 
-.status-wrapper{
+.status-wrapper {
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -37,16 +87,4 @@
   height: 28px;
   box-sizing: border-box;
   margin-left: 8px;
-}
-
-.wait {
-  @extend .status-wrapper;
-  background: rgba(249, 187, 76, 0.12);
-  color: #F9BB4C;
-}
-
-.metting {
-  @extend .status-wrapper;
-  background: rgba(52, 118, 254, 0.12);
-  color: #3476FE;
 }

@@ -2,7 +2,8 @@ import React from "react";
 import { View, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 
-import manHeadPortrait from "@/asstes/images/headPortrait/man.svg";
+import room from "@/asstes/images/room.svg";
+import people from "@/asstes/images/people.svg";
 import { RoomTimeLine } from "../indexSty";
 import { gennerateTaroNavigateParams } from "@/utils/urlParam";
 
@@ -86,7 +87,7 @@ function roomItem(props: propsType) {
     <View className="room-item-box" onClick={goMeetingTime}>
       {/* 会议卡片详情 */}
       <View className="room-item-title">
-        <Image className="room-item-title-img" src={manHeadPortrait}></Image>
+        <Image className="room-item-title-img" src={room}></Image>
         <View className="room-item-title-text">
           <View className="room-item-title-numb">{item.numb}</View>
           <View className="room-item-title-f">
@@ -95,7 +96,7 @@ function roomItem(props: propsType) {
           </View>
         </View>
         <View className="room-item-title-sum">
-          <View className="room-item-title-icon at-icon at-icon-user"></View>
+          <Image className="room-item-title-icon" src={people}></Image>
           <View className="">可容纳{item.sum}人</View>
         </View>
       </View>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, Picker } from "@tarojs/components";
+import { View, Picker, Image } from "@tarojs/components";
 import Taro, { useDidShow } from "@tarojs/taro";
 import { gennerateTaroNavigateParams } from "@/utils/urlParam";
 import { AtInput, AtList, AtListItem } from "taro-ui";
 import { formFields, fillFormFields } from "./formFields";
 import { BtnViews } from "@/components/BtnViews/index";
+import arrow from "@/asstes/images/arrow.svg";
 import "./index.scss";
 
 const remindRanges = ["提前30分钟", "提前10分钟", "提前5分钟"];
@@ -54,15 +55,7 @@ function index() {
         click: onBackViewClick,
       },
     ],
-    3: [
-      {
-        value: "再次预约",
-        disabled: false,
-        hidden: false,
-        class: "",
-        click: onAgainReserve,
-      },
-    ],
+    3: [],
   };
 
   // 完成默认event
@@ -97,7 +90,7 @@ function index() {
   const [param, setParam] = useState({});
 
   // 设置picker默认选中
-  const [remindRangeed, setremindRangeed] = useState(remindRanges[0]);
+  const [remindRangeed, setremindRangeed] = useState(remindRanges[1]);
 
   // 设置初始状态
   const [fromStatus, setFromStatus] = useState("");
@@ -257,7 +250,7 @@ function index() {
                       <View className="go-next-route-text">请选择</View>
                     )}
 
-                    <View className="at-icon at-icon-chevron-right"></View>
+                    <Image className="icon-arrow-right" src={arrow}></Image>
                   </View>
                 </AtInput>
               )
@@ -275,12 +268,17 @@ function index() {
                   key="remindRangeed"
                   mode="selector"
                   range={remindRanges}
+                  value="1"
                   onChange={remindChange.bind(this)}
                 >
                   <AtList>
-                    <AtListItem title={item.label} extraText={remindRangeed} />
+                    <AtListItem
+                      title={item.label}
+                      value="1"
+                      extraText={remindRangeed}
+                    />
                   </AtList>
-                  <View className="at-icon at-icon-chevron-right"></View>
+                  <Image className="icon-arrow-right" src={arrow}></Image>
                 </Picker>
               )
             );

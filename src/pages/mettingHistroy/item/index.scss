@@ -2,37 +2,55 @@ $fontColor: #303133;
 $fontSize: 32px;
 
 .histroy-list {
-  margin-bottom: 56px;
-  &-item{
+  padding: 16px 32px;
+  border-bottom: 10px solid #f6f6f6;
+
+  &:nth-last-child(1) {
+    border-bottom-width: 0;
+  }
+
+  &-item {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
   }
-  
-  &-common{
+
+  &-common {
     color: $fontColor;
     font-size: $fontSize;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
   }
 
-  .meeting{
-    color: #09BB07;
+  .meeting {
+    width: 96px;
+    color: #3476FE;
+    font-size: 24px;
+    background-color: rgba(52, 118, 254, 0.12);
   }
 
-  .wait{
+  .wait {
     color: #F9BB4C;
+    width: 96px;
+    font-size: 24px;
+    background-color: rgba(249, 187, 76, 0.12);
   }
 
-  .end{
-    color: #EBEEF5;
+  .end {
+    color: #C0C4CC;
+    width: 96px;
+    font-size: 24px;
+    background-color: rgba(192, 196, 204, 0.12);
   }
 
-  &-common-second{
+  &-common-second {
     color: #909399;
     font-size: 28px;
   }
 
-  &-item-second{
-    flex-direction:row-reverse;
+  &-item-second {
+    flex-direction: row-reverse;
   }
 
 }
@@ -60,7 +78,7 @@ $fontSize: 32px;
   color: #909399;
 }
 
-.status-wrapper{
+.status-wrapper {
   font-size: 16px;
   display: flex;
   align-items: center;

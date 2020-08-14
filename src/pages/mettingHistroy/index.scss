@@ -13,7 +13,6 @@ $fontColor: #303133;
   @extend .center;
   width: 750px;
   height: 100%;
-  background: #E9E9E9;
   overflow: hidden;
 }
 
@@ -40,18 +39,23 @@ $fontColor: #303133;
   justify-content: space-between;
   padding-top: 52px;
   padding-left: 38px;
-  &-left{
+
+  &-left {
     display: flex;
     align-items: center;
+
+    .user-name {
+      font-weight: 700;
+    }
   }
 
-  &-right{
+  &-right {
     display: flex;
     margin-right: 37px;
     align-items: center;
   }
 
-  &-date{
+  &-date {
     font-size: 32px;
     color: $fontColor;
     margin-right: 20px;
@@ -64,18 +68,20 @@ $fontColor: #303133;
   margin-right: 22px;
 }
 
-.tabs{
+.tabs {
   margin-top: 52px;
   margin-left: 32px;
   margin-bottom: 18px;
   display: flex;
   align-items: center;
-  &-item{
+
+  &-item {
     font-size: 32px;
     color: #909399;
     margin-right: 44px;
   }
-  &-active{
+
+  &-active {
     font-size: 36px;
     color: #3476FE;
     font-weight: bold;
@@ -85,28 +91,30 @@ $fontColor: #303133;
 .lastest-meeting {
   margin-top: 16px;
   box-sizing: border-box;
-  padding: 0 32px ;
 
   &-flex {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 38px;
+    margin-top: 16px;
+    padding: 16px 32px;
   }
 
-  &-list{
-    padding: 0 32px;
+  &-list {
+    height: calc(100vh - 350px);
+    overflow-y: auto;
   }
 
   &-title {
-    font-size: 36px;
-    margin-top: 12px;
+    font-size: 32px;
+    // margin-top: 12px;
     color: #303133;
     font-weight: bold;
+
   }
 
 }
 
-.calendar-icon{
+.calendar-icon {
   width: 32px;
   height: 32px;
   margin-top: 2px;

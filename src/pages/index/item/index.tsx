@@ -1,13 +1,17 @@
-import React from "react";
+import React, { ComponentType, ReactElement } from "react";
 import { View } from "@tarojs/components";
 
 import "./index.scss";
+import { ViewProps } from "@tarojs/components/types/View";
 
 interface itemType {
-  title: string;
   date: string;
-  user: string;
+  time: string;
   status: string;
+  address: string;
+  mettingNumber: string;
+  people: string;
+  fromStatusText: string;
 }
 
 interface propsType {
@@ -19,20 +23,42 @@ interface propsType {
 function LastestMeetingListItem(props: propsType) {
   const { item, onClick } = props;
 
-  return (
-    <View className="metting-list-item" onClick={onClick}>
-      <View className="metting-item-top">
-        <View className="metting-item-top-title">
-          {item.title}
-          {item.status === "wait" ? (
-            <View className="wait">待开始</View>
-          ) : (
-            <View className="metting">进行中</View>
-          )}
-        </View>
-        <View className="metting-item-top-date">{item.date}</View>
+  const statusMap = {
+    wait: "未开始",
+    meeting: "进行中",
+    end: "已结束",
+  };
+
+  // 渲染状态
+  function handleStatus(status) {
+    return (
+      <View className={`"histroy-list-common" + ${status}`}>
+        {statusMap[status]}
       </View>
-      <View className="metting-item-bottom">{item.user}</View>
+    );
+  }
+
+  return (
+    <View className="histroy-list" onClick={onClick}>
+      <View className="histroy-list-item">
+        <View className="histroy-list-common">{item.date}</View>
+        {handleStatus(item.status)}
+      </View>
+      <View className="histroy-list-item">
+        <View className="histroy-list-common">{item.time}</View>
+        <View className="histroy-list-common">{item.address}</View>
+      </View>
+      <View className="histroy-list-item">
+        <View className="histroy-list-common-second">
+          {item.fromStatusText}
+        </View>
+        <View className="histroy-list-common-second">
+          会议号：{item.mettingNumber}
+        </View>
+      </View>
+      <View className="histroy-list-item histroy-list-item-second">
+        <View className="histroy-list-common-second">共{item.people}人</View>
+      </View>
     </View>
   );
 }

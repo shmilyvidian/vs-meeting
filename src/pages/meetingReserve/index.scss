@@ -35,6 +35,14 @@ page {
 
 }
 
+.icon-arrow-right {
+  width: 32px;
+  margin-left: 24px;
+  margin-right: -6px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 !important;
+}
 
 .route-input {
   .at-input__children {
@@ -54,11 +62,16 @@ page {
     justify-content: flex-end;
     line-height: 30px;
     padding: 0;
+    align-items: center;
 
     &-text {
-      color: #606266;
       width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
       text-align: right;
+      color: #606266;
       padding: 0;
       overflow: hidden;
       white-space: nowrap;
@@ -66,7 +79,7 @@ page {
     }
   }
 
-  .at-icon-chevron-right {
+  .icon-arrow-right {
     color: #C0C4CC;
     display: flex;
     align-items: center;
@@ -74,7 +87,7 @@ page {
   }
 
   .at-input--disabled {
-    .at-icon-chevron-right {
+    .icon-arrow-right {
       display: none;
     }
   }
@@ -88,24 +101,33 @@ page {
   .at-list {
     .at-list__item {
       background-color: #fff;
-      padding-left: 32px;
-      padding-right: 32px;
+      padding: 30px 32px;
+      box-sizing: content-box;
 
-      .item-extra__info {
-        color: #606266;
-        padding-right: 50px;
+      &-container {
+        min-height: 44px;
       }
+
+      .at-list__item-extra {
+        display: flex;
+
+        .item-extra__info {
+          color: #606266;
+          padding-right: 48px;
+        }
+      }
+
     }
   }
 
-  .at-icon-chevron-right {
+  .icon-arrow-right {
     color: #C0C4CC;
-    display: flex;
     align-items: center;
     padding-left: 10px;
     position: absolute;
-    top: 36px;
+    top: 50%;
     right: 32px;
+    transform: translateY(-50%);
   }
 }
 
@@ -113,12 +135,12 @@ page {
   .at-list {
     .at-list__item {
       .item-extra__info {
-        padding-right: 0;
+        padding-right: 0 !important;
       }
     }
   }
 
-  .at-icon-chevron-right {
+  .icon-arrow-right {
     display: none;
   }
 }
