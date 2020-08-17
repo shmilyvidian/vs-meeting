@@ -308,7 +308,7 @@ function index() {
                     value={item.value}
                     disabled={item.disabled}
                     onChange={iptChange.bind(this, key)}
-                    placeholder={`1231请输入${item.label}`}
+                    placeholder={`请输入${item.label}`}
                   ></AtInput>
                 )
               );
