@@ -25,12 +25,14 @@ const Index = () => {
           name: "阿丹",
           value: "alist1",
           label: "阿丹",
+          disabled: false,
           // 此处可加其他业务字段
         },
         {
           name: "阿瑶",
           value: "alis2",
           label: "阿瑶",
+          disabled: false,
         },
       ],
     },
@@ -42,11 +44,13 @@ const Index = () => {
           name: "白百合",
           value: "blist1",
           label: "白百合",
+          disabled: false,
         },
         {
           name: "白举纲",
           value: "blist2",
           label: "白举纲",
+          disabled: false,
         },
       ],
     },
@@ -58,11 +62,13 @@ const Index = () => {
           name: "迪丽热巴",
           value: "dlist1",
           label: "迪丽热巴",
+          disabled: false,
         },
         {
           name: "邓紫棋",
           value: "dlist2",
           label: "邓紫棋",
+          disabled: false,
         },
       ],
     },
@@ -74,11 +80,13 @@ const Index = () => {
           name: "Eason ",
           value: "elist1",
           label: "Eason ",
+          disabled: false,
         },
         {
           name: "EXO",
           value: "elist2",
           label: "EXO",
+          disabled: false,
         },
       ],
     },
@@ -90,11 +98,13 @@ const Index = () => {
           name: "范冰冰",
           value: "flist1",
           label: "范冰冰",
+          disabled: false,
         },
         {
           name: "冯绍峰",
           value: "flist2",
           label: "冯绍峰",
+          disabled: false,
         },
       ],
     },
@@ -106,11 +116,13 @@ const Index = () => {
           name: "高圆圆",
           value: "glist1",
           label: "高圆圆",
+          disabled: false,
         },
         {
           name: "郭德纲",
           value: "glist2",
           label: "郭德纲",
+          disabled: false,
         },
       ],
     },
@@ -122,11 +134,13 @@ const Index = () => {
           name: "黄晓明",
           value: "hlist1",
           label: "黄晓明",
+          disabled: false,
         },
         {
           name: "胡歌",
           value: "hlist2",
           label: "胡歌",
+          disabled: false,
         },
       ],
     },
@@ -138,11 +152,13 @@ const Index = () => {
           name: "井柏然",
           value: "jlist1",
           label: "井柏然",
+          disabled: false,
         },
         {
           name: "金秀贤",
           value: "jlist2",
           label: "金秀贤",
+          disabled: false,
         },
       ],
     },
@@ -154,11 +170,13 @@ const Index = () => {
           name: "孔连顺",
           value: "klist1",
           label: "孔连顺",
+          disabled: false,
         },
         {
           name: "昆凌",
           value: "klist2",
           label: "昆凌",
+          disabled: false,
         },
       ],
     },
@@ -170,11 +188,13 @@ const Index = () => {
           name: "那英",
           value: "nlist1",
           label: "那英",
+          disabled: false,
         },
         {
           name: "宁静",
           value: "nlist2",
           label: "宁静",
+          disabled: false,
         },
       ],
     },
@@ -186,11 +206,13 @@ const Index = () => {
           name: "欧豪",
           value: "olist1",
           label: "欧豪",
+          disabled: false,
         },
         {
           name: "欧阳娜娜",
           value: "olist2",
           label: "欧阳娜娜",
+          disabled: false,
         },
       ],
     },
@@ -202,11 +224,13 @@ const Index = () => {
           name: "宋仲基",
           value: "slist1",
           label: "宋仲基",
+          disabled: false,
         },
         {
           name: "孙俪",
           value: "slist2",
           label: "孙俪",
+          disabled: false,
         },
       ],
     },
@@ -218,11 +242,13 @@ const Index = () => {
           name: "吴亦凡",
           value: "wlist1",
           label: "吴亦凡",
+          disabled: false,
         },
         {
           name: "王俊凯",
           value: "wlist2",
           label: "王俊凯",
+          disabled: false,
         },
       ],
     },
@@ -234,11 +260,13 @@ const Index = () => {
           name: "杨超越",
           value: "ylist1",
           label: "杨超越",
+          disabled: false,
         },
         {
           name: "杨洋",
           value: "ylist2",
           label: "杨洋",
+          disabled: false,
         },
       ],
     },
@@ -259,6 +287,7 @@ const Index = () => {
           value: "all",
           label: "全选",
           key: "all",
+          disabled: false,
         },
       ],
     },
@@ -270,7 +299,10 @@ const Index = () => {
           {_item.key}
         </View>
         <AtCheckbox
-          options={_item.items}
+          options={_item.items.map(itm => {
+            itm.disabled = isDisabled
+            return itm
+          })}
           key={i + "name"}
           selectedList={checkedList}
           onChange={(val) => setCheckedList(val)}
@@ -396,7 +428,10 @@ const Index = () => {
         {allSelectList.map((_item, i) => {
           return (
             <AtCheckbox
-              options={_item.items}
+              options={_item.items.map(itm => {
+                itm.disabled = isDisabled
+                return itm
+              })}
               key={i + "all"}
               selectedList={checkedAllList}
               onChange={(val) => setCheckedAllList(val)}
