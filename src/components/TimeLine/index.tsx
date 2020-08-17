@@ -212,16 +212,6 @@ export const TimeLine = function ({ onChange }: IProps) {
     initCurrentText();
   }, [startIndex, endIndex]);
 
-  useDidShow(() => {
-    setTimeTables(JSON.parse(JSON.stringify(timeTablesData)));
-    setStartIndex(9999);
-    setEndIndex(9999);
-    setCurrentText("");
-  });
-  function createMarkup(val) {
-    return { __html: "First &middot; Second" };
-  }
-
   return (
     <View className="pie-box">
       <View className="pie-content ">
@@ -262,8 +252,6 @@ export const TimeLine = function ({ onChange }: IProps) {
           <View className="pie-base-shade-4">
             <View className="text-content">
               <Text>{currentText}</Text>
-              {/* <div dangerouslySetInnerHTML={createMarkup(currentText)}></div> */}
-
               <View></View>
             </View>
           </View>

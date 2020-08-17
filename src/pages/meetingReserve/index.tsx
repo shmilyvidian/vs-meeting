@@ -270,7 +270,7 @@ function index() {
 
   // 输入框变化
   function iptChange(key, val) {
-    meetingMessageObj[key].value = val;
+    meetingMessageObj[key].value = val.slice(0, 15);
     setMeetingMessageObj(JSON.parse(JSON.stringify(meetingMessageObj)));
   }
   // piaker选择change
@@ -302,12 +302,13 @@ function index() {
                   <AtInput
                     className={[item.class, "meeting-input"]}
                     key={key}
+                    type="text"
                     name={key}
                     title={item.label}
                     value={item.value}
                     disabled={item.disabled}
                     onChange={iptChange.bind(this, key)}
-                    placeholder={`请输入${item.label}`}
+                    placeholder={`1231请输入${item.label}`}
                   ></AtInput>
                 )
               );
