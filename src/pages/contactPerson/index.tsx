@@ -244,6 +244,7 @@ const Index = () => {
     },
   ];
 
+  const [isDisabled, setIsDisabled] = useState(false);
   const [searchList, setSearchList] = useState(list);
   const [allSelectListValue, setAllSelectListValue] = useState<any>([]); // 存储所有的联系人的选中值value
   let allListKey: Array<string> = []; // 存储所有的联系人所在的key分类
@@ -291,6 +292,8 @@ const Index = () => {
 
   // 其他页面过来判断是否带参
   useDidShow(() => {
+    const currentPagesData = Taro.getCurrentPages().slice(-1)[0].options || {};
+    setIsDisabled(currentPagesData.disabled === "true");
     const pages = Taro.getCurrentPages();
     const prevPage = pages[pages.length - 2]; //上一个页面
     const prevPageName = prevPage.data.query
@@ -423,15 +426,17 @@ const Index = () => {
       </View>
       {/* end 右侧索引列 */}
       {/* 选择联系人完成按钮 */}
-      <View className="contact-leter-btn">
-        <AtButton
-          type="primary"
-          disabled={!checkedList.length}
-          onClick={goMeetingReserve}
-        >
-          完成
-        </AtButton>
-      </View>
+      {!isDisabled && (
+        <View className="contact-leter-btn">
+          <AtButton
+            type="primary"
+            disabled={!checkedList.length}
+            onClick={goMeetingReserve}
+          >
+            完成
+          </AtButton>
+        </View>
+      )}
       {/* end 选择联系人完成按钮 */}
     </View>
   );

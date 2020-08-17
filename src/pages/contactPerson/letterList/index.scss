@@ -4,12 +4,11 @@
   right: 32rpx;
   overflow: hidden;
   z-index: 805;
-  display: flex;
+  display: none;
   flex-direction: column;
-  height: calc(100% - 370px);
-  top: 220px;
+  height: calc(100% - 390px);
+  top: 230px;
   justify-content: space-between;
-
 
   .lette-list-item {
     text-align: center;

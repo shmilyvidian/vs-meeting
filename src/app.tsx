@@ -7,7 +7,9 @@ import "./app.scss";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // Taro.removeStorageSync("localData");
+    Taro.removeStorageSync("localData");
+    Taro.removeStorageSync("isRemove");
+    Taro.removeStorageSync("temporaryData");
   }
 
   render() {
