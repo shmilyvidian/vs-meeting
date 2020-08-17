@@ -12,7 +12,7 @@ const Index = () => {
   const [name, setName] = useState<string>(""); // 搜索值
   const arrPlaceholder: any = "";
   const [checkedList, setCheckedList] = useState(arrPlaceholder); // 选中的key
-  const [checkedAllList, setCheckedAllListx] = useState([""]); // 全选的key
+  const [checkedAllList, setCheckedAllListAll] = useState([""]); // 全选的key
   const [listScrollHeight, setListScrollHeight] = useState<string>("0px"); // 联系人列表的高度
   const [tolistScrollView, setTolistScrollView] = useState(""); // 点击右侧索引列表要跳至的key
 
@@ -322,14 +322,14 @@ const Index = () => {
     setCheckedList(getCheckedList); // 设置联系人列表选中
     if (allSelectListValueObj.length === checkLen) {
       // 设置联系人是否全选
-      setCheckedAllListx(["all"]);
+      setCheckedAllListAll(["all"]);
     }
   });
 
   // 联系人全选
   function setCheckedAllList(val) {
-    setCheckedList(val.length ? allSelectListValue : []);
-    setCheckedAllListx(val);
+    setCheckedList(val.indexOf('all') > -1 ? allSelectListValue : []);
+    setCheckedAllListAll(val);
   }
 
   // 搜索联系人
